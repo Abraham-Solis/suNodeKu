@@ -1,7 +1,3 @@
 # suNodeKu
 
-
-
-
-
 Abe Was Here 
