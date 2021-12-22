@@ -1,0 +1,42 @@
+
+<style>
+    table#sudoku_grid tr, table#sudoku_grid td {
+        border: 1px solid #000;
+        width: 64px;
+        height: 64px;
+        text-align: center;
+        font-size: 18pt;
+        font-weight: bold;
+    }
+</style>
+
+<h1>Prototype sudoku</h1>
+
+<div id="game" class="container">
+    <table id="sudoku_grid"></table>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+
+    axios.get("/api/sudoku/new/easy").then(res => {
+        let grid = res.data.puzzle;
+
+        let sudoku_grid = document.getElementById('sudoku_grid');
+
+        for(let y = 0; y < 9; y++) {
+            let row = document.createElement('tr');
+            for(let x = 0; x < 9; x++) {
+                let column = document.createElement('td');
+                let index = x + (y*9);
+                if(grid[index] !== '-') {
+                    column.innerHTML = grid[index];
+                }
+                row.append(column);
+            }
+            sudoku_grid.append(row);
+        }
+    })
+
+</script>

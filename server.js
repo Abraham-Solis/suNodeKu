@@ -36,6 +36,10 @@ app.put('/api/sudoku/:cellIndex/:number', (req, res) => {
   res.sendStatus(200);
 })
 
+app.get('/game', (req, res) => {
+  res.render('game')
+})
+
 
 
 
