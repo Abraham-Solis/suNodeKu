@@ -15,4 +15,8 @@ app.get('/', (req, res) => {
     res.render('index')
   })
 
+app.get('/mainmenu', (req, res) => {
+  res.render('mainmenu')
+})
+
 app.listen(3000)
