@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Document</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Not Facebook</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/profile.html">Profile</a>
+          </li>
+        </ul>
+        <button id="logout" class="btn btn-outline-primary" type="submit">Logout</button>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row bg-light p-5 rounded-lg mb-3 mt-3">
+      <h1 class="display-4">Not Facebook</h1>
+      <p class="lead">This is a simple blog app that is definitely NOT a facebook clone. Why would you think that?
+        Pretty weird.</p>
+      <hr class="my-4">
+      <p class="lead">Here are <span id="username">johndoe</span>'s posts!</p>
+    </div>
+    <div id="posts" class="row"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script>
+
+    async function logoutUser() {
+      localStorage.removeItem('username')
+      localStorage.removeItem('token')
+      location = '/login.html'
+    }
+
+    async function getProfile() {
+      try {
+        const { data: user } = await axios.get('/api/users/profile', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        })
+        return user
+
+      } catch (err) {
+        location = '/login.html'
+      }
+    }
+
+    async function renderPost({ title, body }) {
+      const postElem = document.createElement('div')
+      postElem.innerHTML = `
+              <div class="row bg-light p-5 rounded-md mb-2 mt-2">
+                <h3>${title}</h3>
+                <p class="lead">${body}</p>
+                <hr class="my-4">
+              </div>
+            `
+      document.getElementById('posts').prepend(postElem)
+    }
+
+    async function renderPosts() {
+      const { posts } = await getProfile()
+
+      posts.forEach(post => renderPost(post))
+    }
+
+    async function renderUsername() {
+      const username = localStorage.getItem('username')
+
+      document.getElementById('username').textContent = username
+    }
+
+    document.getElementById('logout').addEventListener('click', logoutUser)
+
+    renderPosts()
+    renderUsername()
+  </script>
+</body>
+
+</html>

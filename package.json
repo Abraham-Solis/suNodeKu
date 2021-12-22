@@ -1,0 +1,33 @@
+{
+  "name": "sunodeku",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abraham-Solis/suNodeKu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abraham-Solis/suNodeKu/issues"
+  },
+  "homepage": "https://github.com/Abraham-Solis/suNodeKu#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "mysql2": "^2.3.3",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
+    "passport-local-sequelize": "^0.9.0",
+    "sequelize": "^6.12.2",
+    "sudoku-gen": "^1.0.0"
+  }
+}
