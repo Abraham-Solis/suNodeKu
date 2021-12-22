@@ -4,9 +4,66 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Leaderboard</title>
 </head>
 <body>
+  <div id="content"></div>
+  <script>
+
+//logic for figuring out which username has highest totalGames, lowest averageTime, lowest fastestTime
   
+
+    
+//function for getting info
+  async function renderPosts() {
+      const { leaderboardEasy } = await getProfile()
+
+      winners.forEach(winners => renderLeaderboardEasy(winner))
+    }
+    document.getElementById('content').innerHTML = `
+    <h1>Leaderboard</h1>
+    <br><hr><br>
+    <h3>Easy</h3>  
+    <h5>Most Completed Games</h5>
+    <h5>${username} ~ ${totalGames}</h5>
+    <br>
+    <h5>Best Average Time</h5>
+    <h5>${username} ~ ${averageTime}</h5>
+    <br>
+    <h5>Fastest Time</h5>
+    <h5>${username} ~ ${fastestTime}</h5>
+    <br><br>
+    <h3>Medium</h3>
+    <h5>Most Completed Games</h5>
+    <h5>${username} ~ ${totalGames}</h5>
+    <br>
+    <h5>Best Average Time</h5>
+    <h5>${username} ~ ${averageTime}</h5>
+    <br>
+    <h5>Fastest Time</h5>
+    <h5>${username} ~ ${fastestTime}</h5>
+    <br><br>
+    <h3>Hard</h3>
+    <h5>Most Completed Games</h5>
+    <h5>${username} ~ ${totalGames}</h5>
+    <br>
+    <h5>Best Average Time</h5>
+    <h5>${username} ~ ${averageTime}</h5>
+    <br>
+    <h5>Fastest Time</h5>
+    <h5>${username} ~ ${fastestTime}</h5>
+    <br><br>
+    <h3>Expert</h3>
+    <h5>Most Completed Games</h5>
+    <h5>${username} ~ ${totalGames}</h5>
+    <br>
+    <h5>Best Average Time</h5>
+    <h5>${username} ~ ${averageTime}</h5>
+    <br>
+    <h5>Fastest Time</h5>
+    <h5>${username} ~ ${fastestTime}</h5>
+    <br><br>
+    `
+  </script>
 </body>
 </html>
