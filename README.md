@@ -1,3 +1,1 @@
-# suNodeKu
-
-*Merge conflict intensifies*
+This is bradley's test commit
