@@ -1,5 +1,6 @@
 const express = require('express')
 const { join } = require('path')
+const sudoku = require('sudoku-gen')
 
 const app = express()
 
@@ -18,5 +19,31 @@ app.get('/', (req, res) => {
 app.get('/mainmenu', (req, res) => {
   res.render('mainmenu')
 })
+
+app.listen(3000)
+
+app.get('/api/sudoku/new/:difficulty', (req, res) => {
+  let puzzle = sudoku.getSudoku(req.params.difficulty);
+  // Insert into db
+  res.json(puzzle);
+})
+
+app.get('/api/sudoku/:id', (req, res) => {
+  // Fetch puzzle from mysql by req.param.db
+  let puzzle = {}
+  // Insert into db
+  res.json(puzzle);
+})
+
+app.put('/api/sudoku/:cellIndex/:number', (req, res) => {
+  // Insert req.params.number into req.params.cellIndex
+  // Insert into db
+  res.sendStatus(200);
+})
+
+
+
+
+
 
 app.listen(3000)
