@@ -17,6 +17,12 @@ const sequelize = require('../db')
 // }, { sequelize, modelName: 'user' })
 
 const User = pls.defineUser(sequelize, {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false
+  },
   username: {
     type: DataTypes.STRING,
     allowNull: false
@@ -24,6 +30,19 @@ const User = pls.defineUser(sequelize, {
   email: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  totalGames: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    default: 0
+  },
+  averageTime: {
+    type: DataTypes.DECIMAL,
+    allowNull: true
+  },
+  fastestTime: {
+    type: DataTypes.DECIMAL,
+    allowNull: true
   }
 })
 
