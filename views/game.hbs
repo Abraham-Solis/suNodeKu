@@ -1,0 +1,100 @@
+
+<style>
+    table#sudoku_grid tr, table#sudoku_grid td {
+        
+        border: 1px solid #000;
+        width: 64px;
+        height: 64px;
+        text-align: center;
+        font-size: 18pt;
+        font-weight: bold;
+    }
+
+    .selected {
+        background-color: red;
+    }
+
+    .given {
+        background-color: lightgray;
+    }
+
+    button {
+        width: 2em;
+    }
+
+</style>
+
+<h1>Prototype sudoku</h1>
+
+<div id="game" class="container">
+    <table id="sudoku_grid"></table>
+    <button class="num">&nbsp;</button>
+    <button class="num">0</button>
+    <button class="num">1</button>
+    <button class="num">2</button>
+    <button class="num">3</button>
+    <button class="num">4</button>
+    <button class="num">5</button>
+    <button class="num">6</button>
+    <button class="num">7</button>
+    <button class="num">8</button>
+    <button class="num">9</button>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    let selected = null;
+
+    let isGiven = () => {
+        if(selected) {
+            return selected.className.split(' ').includes('given')
+        }
+        return false;
+    }
+
+    document.addEventListener('click', event => {
+        if(event.target.className === "cell") {
+            if(selected) selected.className = "cell";
+
+            event.target.className += " selected";
+            selected = event.target;
+        } else if(event.target.className === "num" && selected) {
+            if(!isGiven()) {
+                selected.innerHTML = event.target.innerHTML; 
+            }
+        }
+    })
+
+    axios.get("/api/sudoku/new/easy").then(res => {
+        let grid = res.data.puzzle;
+
+        let sudoku_grid = document.getElementById('sudoku_grid');
+
+        for(let y = 0; y < 9; y++) {
+            let row = document.createElement('tr');
+
+            if(y == 2 || y == 5) {
+                row.style.borderBottom = "3px solid #000";
+            }
+
+            for(let x = 0; x < 9; x++) {
+                let column = document.createElement('td');
+                let index = x + (y*9);
+                column.id = index;
+                column.className = "cell"
+                if(grid[index] !== '-') {
+                    column.innerHTML = grid[index];
+                    column.className = " given";
+                }
+
+                if(x == 2 || x == 5) {
+                    column.style.borderRight = "3px solid #000";
+                }
+                row.append(column);
+            }
+            sudoku_grid.append(row);
+        }
+    })
+
+</script>
