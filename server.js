@@ -47,6 +47,11 @@ app.get('/game', (req, res) => {
   res.render('game')
 })
 
+app.get('/leaderboard', (req, res) => {
+  res.render('leaderboard')
+})
+
+
 
 
 
