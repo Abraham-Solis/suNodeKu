@@ -30,6 +30,16 @@ a {
     background-color: #3A506B;
 }
 
+.statsWelcome {
+    font-size: 90px;
+    color: #6FFFE9;
+}
+
+.statsSubHeading {
+    font-size: 45px;
+    color: #5BC0BE;
+}
+
 .statsEasy {
     background-color: #99d98c;
 }
@@ -80,23 +90,28 @@ a {
 }
 
 .buttonEasy {
-    background-color: #99d98c ;
+    background-color: #99d98c;
 }
 
 .buttonMedium {
-    background-color: #fcbf49 ;
+    background-color: #fcbf49;
 }
 
 .buttonHard {
-    background-color: #d62828 ;
+    background-color: #d62828;
 }
 
 
 .buttonExpert {
-    background-color: #800016 ;
+    background-color: #800016;
 }
 
-.difficultyText{
+.difficultyText {
+    color: #6FFFE9;
+    font-size: 90px;
+    padding-top: 20px;
+    padding-bottom: 90px;
     text-align: center;
     font-weight: bolder;
+    text-shadow: black;
 }
