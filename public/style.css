@@ -53,3 +53,14 @@ a {
     font-weight: bold;
     padding-bottom: 25px;
 }
+.achievementCenter{
+   text-align: center;
+}
+.achievementCard{
+    justify-content: center;
+}
+
+.achievementHeader{
+    font-weight: bold;
+
+}
