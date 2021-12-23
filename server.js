@@ -23,22 +23,26 @@ app.get('/api/sudoku/new/:difficulty', (req, res) => {
   res.json(puzzle);
 })
 
-app.get('/api/sudoku/:id', (req, res) => {
+app.get('/api/sudoku/:id', async (req, res) => {
   // Fetch puzzle from mysql by req.param.db
-  // let puzzle = sudoku.createFromDB(game.gameData)
+  /*
+    let game = await Game.fetchAll({where: {id: req.param.id}}).then();
+    let puzzle = sudoku.createFromDB(game.gameData);
+    res.json(puzzle)
+  */
   let puzzle = {}
   res.json(puzzle);
 })
 
-app.put('/api/sudoku/:id/:cellIndex/:number', (req, res) => {
+app.put('/api/sudoku/:id/:cellIndex/:number', async (req, res) => {
   /*
-  // fetch from db using req.param.id
+  let game = await Game.fetchAll({where: {id: req.param.id}}) 
   let puzzle = sudoku.createFromDB(game.gameData)
   if(puzzle.given[req.params.cellIndex] === 0) {
     puzzle.board[req.params.cellIndex] = req.params.number
   }
-  // let gameData = puzzle.compress()
-  // update game table by req.param.id set gameData to ${gameData}
+  let gameData = puzzle.compress()
+  Game.update({gameData: puzzle.compress}, {where: {id: req.params.id}}) 
   */
   res.sendStatus(200);
 })
