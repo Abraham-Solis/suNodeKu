@@ -9,7 +9,7 @@ nav {
 
 footer {
     background-color: #09BC8A;
-      }
+}
 
 a {
     color: #212529 !important;
@@ -27,7 +27,6 @@ html, body {
     overflow-x: hidden;
 }
 
-
 /* STYLING FOR MAIN MENU PAGE */
 .statsPadding {
     padding-top: 19px;
@@ -35,7 +34,7 @@ html, body {
 }
 
 .statsBackground {
-    background-color: #3A506B;
+    background-color: #3A506B !important;
 }
 
 .statsWelcome {
