@@ -38,6 +38,16 @@ html, body {
     background-color: #3A506B;
 }
 
+.statsWelcome {
+    font-size: 90px;
+    color: #6FFFE9;
+}
+
+.statsSubHeading {
+    font-size: 45px;
+    color: #5BC0BE;
+}
+
 .statsEasy {
     background-color: #99d98c;
 }
@@ -54,21 +64,61 @@ html, body {
     background-color: #800016;
 }
 
-.statsText{
+.statsText {
     font-size: 30px;
 }
-.statsHeading{
+
+.statsHeading {
     font-weight: bold;
     padding-bottom: 25px;
 }
-.achievementCenter{
-   text-align: center;
+
+.achievementCenter {
+    text-align: center;
 }
-.achievementCard{
+
+.achievementCard {
     justify-content: center;
 }
 
-.achievementHeader{
+.achievementHeader {
     font-weight: bold;
 
+}
+
+/* STYLING FOR DIFFICULTY PAGE */
+
+.difficultyBackground {
+    background-color: #3A506B;
+}
+
+.buttonSpacer {
+    padding-top: 25px;
+    padding-bottom: 15px;
+}
+
+.buttonEasy {
+    background-color: #99d98c;
+}
+
+.buttonMedium {
+    background-color: #fcbf49;
+}
+
+.buttonHard {
+    background-color: #d62828;
+}
+
+
+.buttonExpert {
+    background-color: #800016;
+}
+
+.difficultyText {
+    color: #6FFFE9;
+    font-size: 90px;
+    padding-top: 20px;
+    padding-bottom: 90px;
+    text-align: center;
+    font-weight: bolder;
 }

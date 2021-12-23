@@ -20,6 +20,9 @@ app.get('/mainmenu', (req, res) => {
   res.render('mainmenu')
 })
 
+app.get('/difficulty', (req, res) => {
+  res.render('difficulty')
+})
 
 app.get('/api/sudoku/new/:difficulty', (req, res) => {
   let puzzle = sudoku.getSudoku(req.params.difficulty);
