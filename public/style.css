@@ -16,5 +16,51 @@ a {
 }
 
 #jumbo {
-   background-color: #508991 !important;
+    background-color: #508991 !important;
+}
+
+
+/* STYLING FOR MAIN MENU PAGE */
+.statsPadding {
+    padding-top: 19px;
+    padding-bottom: 125px;
+}
+
+.statsBackground {
+    background-color: #3A506B;
+}
+
+.statsEasy {
+    background-color: #99d98c;
+}
+
+.statsMedium {
+    background-color: #fcbf49;
+}
+
+.statsHard {
+    background-color: #d62828;
+}
+
+.statsExpert {
+    background-color: #800016;
+}
+
+.statsText{
+    font-size: 30px;
+}
+.statsHeading{
+    font-weight: bold;
+    padding-bottom: 25px;
+}
+.achievementCenter{
+   text-align: center;
+}
+.achievementCard{
+    justify-content: center;
+}
+
+.achievementHeader{
+    font-weight: bold;
+
 }
