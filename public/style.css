@@ -121,3 +121,18 @@ html, body {
     text-align: center;
     font-weight: bolder;
 }
+
+/* GAME PAGE  */
+
+.gameBackground {
+    background-color: #3A506B;
+}
+
+.gameTitle {
+    color: #6FFFE9;
+    font-size: 90px;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 50px;
+}
+
