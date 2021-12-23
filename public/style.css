@@ -136,3 +136,8 @@ html, body {
     padding-bottom: 50px;
 }
 
+/* Leaderboard page */
+
+.leaderboard-background {
+    background-color: #3A506B;
+}
