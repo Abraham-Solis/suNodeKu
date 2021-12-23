@@ -1,7 +1,7 @@
-
 <style>
-    table#sudoku_grid tr, table#sudoku_grid td {
-        
+    table#sudoku_grid tr,
+    table#sudoku_grid td {
+
         border: 1px solid #000;
         width: 64px;
         height: 64px;
@@ -11,7 +11,7 @@
     }
 
     .selected {
-        background-color: green;
+        background-color: #6FFFE9;
     }
 
     .wrong {
@@ -25,29 +25,32 @@
     button {
         width: 2em;
     }
-
 </style>
 
+<body class="gameBackground">
 
-<h1>Prototype sudoku</h1>
+    <h1 class="gameTitle">Good Luck!</h1>
 
-<div id="game" class="container">
-    <table id="sudoku_grid"></table>
-    <button class="num">&nbsp;</button>
-    <button class="num">0</button>
-    <button class="num">1</button>
-    <button class="num">2</button>
-    <button class="num">3</button>
-    <button class="num">4</button>
-    <button class="num">5</button>
-    <button class="num">6</button>
-    <button class="num">7</button>
-    <button class="num">8</button>
-    <button class="num">9</button>
-    <button id="check_answers">Check answers (CHEATER!)</button>
-</div>
+    <div class="gameBoard">
+    <div id="game" class="container gameBoard">
+        <table id="sudoku_grid"></table>
+        <button class="num">&nbsp;</button>
+        <button class="num">0</button>
+        <button class="num">1</button>
+        <button class="num">2</button>
+        <button class="num">3</button>
+        <button class="num">4</button>
+        <button class="num">5</button>
+        <button class="num">6</button>
+        <button class="num">7</button>
+        <button class="num">8</button>
+        <button class="num">9</button>
+        <button id="check_answers">Check answers (CHEATER!)</button>
+        </div>
+    </div>
 
 
+</body>
 
 
 
@@ -70,30 +73,30 @@
     let currentPuzzle = null;
 
     let isGiven = () => {
-        if(selected) {
+        if (selected) {
             return selected.className.split(' ').includes('given')
         }
         return false;
     }
 
     document.addEventListener('click', event => {
-        if(event.target.className === "cell") {
-            if(selected) selected.className = "cell";
+        if (event.target.className === "cell") {
+            if (selected) selected.className = "cell";
 
             event.target.className += " selected";
             selected = event.target;
-        } else if(event.target.className === "num" && selected) {
-            if(!isGiven()) {
-                selected.innerHTML = event.target.innerHTML; 
+        } else if (event.target.className === "num" && selected) {
+            if (!isGiven()) {
+                selected.innerHTML = event.target.innerHTML;
             }
         }
     })
 
     document.getElementById('check_answers').addEventListener('click', event => {
-        for(let i = 0; i < 72; i++) {
+        for (let i = 0; i < 72; i++) {
             let cell = document.getElementById(i);
-            if(cell.innerHTML !== '' && cell.innerHTML !== '&nbsp;') {
-                if(cell.innerHTML != currentPuzzle.solution[i]) {
+            if (cell.innerHTML !== '' && cell.innerHTML !== '&nbsp;') {
+                if (cell.innerHTML != currentPuzzle.solution[i]) {
                     cell.className += ' wrong';
                 }
             }
@@ -105,24 +108,24 @@
 
         let sudoku_grid = document.getElementById('sudoku_grid');
 
-        for(let y = 0; y < 9; y++) {
+        for (let y = 0; y < 9; y++) {
             let row = document.createElement('tr');
 
-            if(y == 2 || y == 5) {
+            if (y == 2 || y == 5) {
                 row.style.borderBottom = "3px solid #000";
             }
 
-            for(let x = 0; x < 9; x++) {
+            for (let x = 0; x < 9; x++) {
                 let column = document.createElement('td');
-                let index = x + (y*9);
+                let index = x + (y * 9);
                 column.id = index;
                 column.className = "cell"
-                if(currentPuzzle.puzzle[index] !== '-') {
+                if (currentPuzzle.puzzle[index] !== '-') {
                     column.innerHTML = currentPuzzle.puzzle[index];
                     column.className = " given";
                 }
 
-                if(x == 2 || x == 5) {
+                if (x == 2 || x == 5) {
                     column.style.borderRight = "3px solid #000";
                 }
                 row.append(column);
