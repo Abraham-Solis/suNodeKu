@@ -46,21 +46,52 @@ a {
     background-color: #800016;
 }
 
-.statsText{
+.statsText {
     font-size: 30px;
 }
-.statsHeading{
+
+.statsHeading {
     font-weight: bold;
     padding-bottom: 25px;
 }
-.achievementCenter{
-   text-align: center;
+
+.achievementCenter {
+    text-align: center;
 }
-.achievementCard{
+
+.achievementCard {
     justify-content: center;
 }
 
-.achievementHeader{
+.achievementHeader {
     font-weight: bold;
 
+}
+
+/* STYLING FOR DIFFICULTY PAGE */
+
+.difficultyBackground {
+    background-color: #3A506B;
+}
+
+.buttonSpacer {
+    padding-top: 25px;
+    padding-bottom: 15px;
+}
+
+.buttonEasy {
+    background-color: #99d98c ;
+}
+
+.buttonMedium {
+    background-color: #fcbf49 ;
+}
+
+.buttonHard {
+    background-color: #d62828 ;
+}
+
+
+.buttonExpert {
+    background-color: #800016 ;
 }
