@@ -25,6 +25,7 @@
     "handlebars": "^4.7.7",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
-    "sudoku-gen": "^1.0.0"
+    "sudoku-gen": "^1.0.0",
+    "timer-node": "^5.0.5"
   }
 }
