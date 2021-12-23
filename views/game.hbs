@@ -80,10 +80,11 @@
     }
 
     document.addEventListener('click', event => {
-        if (event.target.className === "cell") {
-            if (selected) selected.className = "cell";
+        let classList = event.target.className.split(' ');
+        if(classList.includes("cell") && !classList.includes("given")) {
+            if(selected) selected.className = "cell";
 
-            event.target.className += " selected";
+            event.target.className = "cell selected";
             selected = event.target;
         } else if (event.target.className === "num" && selected) {
             if (!isGiven()) {
@@ -120,9 +121,11 @@
                 let index = x + (y * 9);
                 column.id = index;
                 column.className = "cell"
-                if (currentPuzzle.puzzle[index] !== '-') {
-                    column.innerHTML = currentPuzzle.puzzle[index];
+                if(currentPuzzle.given[index]) {
                     column.className = " given";
+                }
+                if(!currentPuzzle.blank[index]) {
+                    column.innerHTML = currentPuzzle.board[index];
                 }
 
                 if (x == 2 || x == 5) {
