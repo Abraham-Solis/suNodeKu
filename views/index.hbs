@@ -47,4 +47,58 @@
   
 
   </div>
+  <script>
+
+    async function registerUser(user) {
+      try {
+        await axios.post('/api/users/register', user)
+        return true
+
+      } catch (err) {
+        alert('Invalid Info Has Been Entered. Please Try Again.')
+      }
+    }
+
+    async function loginUser(user) {
+      try {
+        const { data } = await axios.post('/api/users/login', user)
+        return data
+
+      } catch (err) {
+        alert('Something Went Wrong. Please Try Again.')
+      }
+    }
+
+    document.getElementById('register').addEventListener('click', async function (event) {
+      event.preventDefault()
+
+      const isCreated = await registerUser({
+        username: document.getElementById('rUsername').value,
+        email: document.getElementById('rEmail').value,
+        password: document.getElementById('rPassword').value
+      })
+
+      if (isCreated) {
+        alert('Your Account Has Been Created! Please Login.')
+      }
+    })
+
+    document.getElementById('login').addEventListener('click', async function (event) {
+      event.preventDefault()
+
+      const { username, token } = await loginUser({
+        username: document.getElementById('lUsername').value,
+        password: document.getElementById('lPassword').value
+      })
+
+      if (token) {
+        localStorage.setItem('username', username)
+        localStorage.setItem('token', token)
+        location = '/'
+      } else {
+        alert('Invalid Username Or Password. Please Try Again.')
+      }
+    })
+
+  </script>
   </body>
