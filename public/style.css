@@ -95,3 +95,8 @@ a {
 .buttonExpert {
     background-color: #800016 ;
 }
+
+.difficultyText{
+    text-align: center;
+    font-weight: bolder;
+}
