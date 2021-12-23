@@ -11,6 +11,10 @@
     }
 
     .selected {
+        background-color: green;
+    }
+
+    .wrong {
         background-color: red;
     }
 
@@ -39,12 +43,14 @@
     <button class="num">7</button>
     <button class="num">8</button>
     <button class="num">9</button>
+    <button id="check_answers">Check answers (CHEATER!)</button>
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     let selected = null;
+    let currentPuzzle = null;
 
     let isGiven = () => {
         if(selected) {
@@ -66,8 +72,19 @@
         }
     })
 
+    document.getElementById('check_answers').addEventListener('click', event => {
+        for(let i = 0; i < 72; i++) {
+            let cell = document.getElementById(i);
+            if(cell.innerHTML !== '' && cell.innerHTML !== '&nbsp;') {
+                if(cell.innerHTML != currentPuzzle.solution[i]) {
+                    cell.className += ' wrong';
+                }
+            }
+        }
+    })
+
     axios.get("/api/sudoku/new/easy").then(res => {
-        let grid = res.data.puzzle;
+        currentPuzzle = res.data;
 
         let sudoku_grid = document.getElementById('sudoku_grid');
 
@@ -83,8 +100,8 @@
                 let index = x + (y*9);
                 column.id = index;
                 column.className = "cell"
-                if(grid[index] !== '-') {
-                    column.innerHTML = grid[index];
+                if(currentPuzzle.puzzle[index] !== '-') {
+                    column.innerHTML = currentPuzzle.puzzle[index];
                     column.className = " given";
                 }
 
