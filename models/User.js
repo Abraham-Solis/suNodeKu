@@ -37,11 +37,11 @@ const User = pls.defineUser(sequelize, {
     default: 0
   },
   averageTime: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING,
     allowNull: true
   },
   fastestTime: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING,
     allowNull: true
   }
 })

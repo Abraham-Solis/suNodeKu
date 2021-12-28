@@ -2,9 +2,9 @@ const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../db')
 
 class Stats extends Model { }
-Post.init({
+Stats.init({
   totalTime: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING,
     allowNull: false
   },
   averageTime: {
