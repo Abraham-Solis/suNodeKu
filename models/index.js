@@ -10,5 +10,8 @@ User.hasMany(Post, { foreignKey: 'uid' })
 Post.hasMany(Comment, { foreignKey: 'uid' })
 Comment.belongsTo(Post, { foreignKey: 'uid' })
 Post.belongsTo(User, { foreignKey: 'uid' })
+User.hasMany(Achievement, { foreignKey: 'uid '})
+//findAll on achievement (in index.js under public) -- look at ecommerceBackEnd
+User.hasMany(Stats, { foreignKey: 'uid ' })
 
 module.exports = { User, Post, Comment }

@@ -15,17 +15,15 @@
 
     
 //function for getting info
-  async function renderPosts() {
-      const { leaderboardEasy } = await getProfile()
-
-      winners.forEach(winners => renderLeaderboardEasy(winner))
+  async function renderLeaderboard() {
+//logic in the callback function
     }
     document.getElementById('content').innerHTML = `
     <h1>Leaderboard</h1>
     <br><hr><br>
     <h3>Easy</h3>  
     <h5>Most Completed Games</h5>
-    <h5>${username} ~ ${totalGames}</h5>
+    <h5>{{username}} ~ ${totalGames}</h5>
     <br>
     <h5>Best Average Time</h5>
     <h5>${username} ~ ${averageTime}</h5>

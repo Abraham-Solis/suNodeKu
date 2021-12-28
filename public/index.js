@@ -37,7 +37,7 @@
                   <p class="lead">This is a simple blog app that is definitely NOT a facebook clone. Why would you think that?
                     Pretty weird.</p>
                   <hr class="my-4">
-                    <p class="lead">Welcome Back <span id="username">johndoe</span>!</p>
+                    <p class="lead">Welcome Back <span id="username"></span>!</p>
                 </div>
                 <div class="row">
                   <!-- form for logged-in user to create a new post -->
