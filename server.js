@@ -14,6 +14,18 @@ app.use(express.static(join(__dirname, "public")))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
+// app.use(passport.initialize())
+// app.use(passport.session())
+
+// passport.use(User.createStrategy())
+
+// passport.serializeUser(User.serializeUser())
+// passport.deserializeUser(User.deserializeUser())
+
+// passport.use(new JWTStrategy({
+//   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+//   secretOrKey: process.env.SECRET
+
 app.engine('.hbs', require('express-handlebars').engine({ extname: '.hbs' }))
 app.set('view engine', '.hbs');
 app.set('views', './views');
