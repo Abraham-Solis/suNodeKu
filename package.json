@@ -27,6 +27,8 @@
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
+    "passport-local-sequelize": "^0.8.0",
     "sequelize": "^6.12.4",
     "sudoku-gen": "^1.0.0",
     "timer-node": "^5.0.5"
