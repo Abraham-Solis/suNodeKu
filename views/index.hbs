@@ -1,8 +1,8 @@
 <body class="min-vh-100">
-  
+{{!-- main banner with website name --}}
   <div class="container">
     <div class="row bg-light p-5 rounded-lg mb-3 mt-3" id="jumbo">
-      <h1 class="display-4 d-flex justify-content-center">SuNodeKu</h1>
+      <h1 class="display-4 d-flex justify-content-center" id="mainname">SuNodeKu</h1>
       <p class="lead d-flex justify-content-center">SuNodeKu is an interactive puzzle challenge create a profile then choose a difficulty to get started!</p>
       <hr class="my-4">
     </div>
@@ -10,6 +10,7 @@
       <div class="col-sm-6">
         <h3>Register New Account</h3>
         <hr>
+{{!-- form for registering user --}}
         <form>
           <div class="mb-3">
             <label for="rUsername" class="form-label">Username</label>
@@ -29,6 +30,7 @@
       <div class="col-sm-6">
         <h3>Login To Existing Account</h3>
         <hr>
+{{!-- form for logging into created accounts --}}
         <form>
           <div class="mb-3">
             <label for="lUsername" class="form-label">Username</label>
@@ -45,4 +47,58 @@
   
 
   </div>
+  <script>
+
+    async function registerUser(user) {
+      try {
+        await axios.post('/api/users/register', user)
+        return true
+
+      } catch (err) {
+        alert('Invalid Info Has Been Entered. Please Try Again.')
+      }
+    }
+
+    async function loginUser(user) {
+      try {
+        const { data } = await axios.post('/api/users/login', user)
+        return data
+
+      } catch (err) {
+        alert('Something Went Wrong. Please Try Again.')
+      }
+    }
+
+    document.getElementById('register').addEventListener('click', async function (event) {
+      event.preventDefault()
+
+      const isCreated = await registerUser({
+        username: document.getElementById('rUsername').value,
+        email: document.getElementById('rEmail').value,
+        password: document.getElementById('rPassword').value
+      })
+
+      if (isCreated) {
+        alert('Your Account Has Been Created! Please Login.')
+      }
+    })
+
+    document.getElementById('login').addEventListener('click', async function (event) {
+      event.preventDefault()
+
+      const { username, token } = await loginUser({
+        username: document.getElementById('lUsername').value,
+        password: document.getElementById('lPassword').value
+      })
+
+      if (token) {
+        localStorage.setItem('username', username)
+        localStorage.setItem('token', token)
+        location = '/'
+      } else {
+        alert('Invalid Username Or Password. Please Try Again.')
+      }
+    })
+
+  </script>
   </body>

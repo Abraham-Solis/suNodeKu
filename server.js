@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const { join } = require('path')
 const sudoku = require('./lib/sudoku.js')
@@ -57,6 +59,11 @@ app.put('/api/sudoku/:id/:cellIndex/:number', async (req, res) => {
 app.get('/game', (req, res) => {
   res.render('game')
 })
+
+app.get('/leaderboard', (req, res) => {
+  res.render('leaderboard')
+})
+
 
 
 /*

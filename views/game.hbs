@@ -1,13 +1,29 @@
 <style>
+
+    table#sudoku_grid {
+        width:100%;
+    }
+
     table#sudoku_grid tr,
     table#sudoku_grid td {
-
         border: 1px solid #000;
-        width: 64px;
-        height: 64px;
         text-align: center;
         font-size: 18pt;
         font-weight: bold;
+    }
+
+    @media only screen and (max-width: 600px) {
+        table#sudoku_grid tr,
+        table#sudoku_grid td {
+            font-size: 12pt;
+        }
+    }
+
+    table#sudoku_grid td {
+        width: 11.1%;
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+        vertical-align: middle;
     }
 
     .selected {
@@ -25,17 +41,19 @@
     button {
         width: 2em;
     }
+
+    #check_answers {
+        width: 6em;
+    }
 </style>
 
 <body class="gameBackground">
 
     <h1 class="gameTitle">Good Luck!</h1>
 
-
-
-    <div id="game" class="container">
-        <table id="sudoku_grid" class="centerBoard"></table>
-        <div class="container" >
+    <div class="gameBoard">
+    <div id="game" class="container gameBoard" style="text-align: center;">
+        <table id="sudoku_grid"></table>
         <button class="num">&nbsp;</button>
         <button class="num">0</button>
         <button class="num">1</button>
@@ -46,7 +64,7 @@
         <button class="num">6</button>
         <button class="num">7</button>
         <button class="num">8</button>
-        <button class="num">9</button>
+        <button class="num">9</button><br />
         <button id="check_answers">Check answers (CHEATER!)</button>
         </div>
         </div>
