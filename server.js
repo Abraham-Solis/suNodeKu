@@ -1,11 +1,11 @@
-require('dotenv').config()
+// require('dotenv').config()
 
 const express = require('express')
 const { join } = require('path')
 const sudoku = require('./lib/sudoku.js')
 
 // const passport = require('passport')
-// const { User } = require('./models')
+// const { User, Post, Comments } = require('./models')
 // const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt')
 
 const app = express()
@@ -25,6 +25,16 @@ app.use(express.json())
 // passport.use(new JWTStrategy({
 //   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 //   secretOrKey: process.env.SECRET
+// }, async function ({ id }, cb) {
+//   try {
+//     const user = await User.findOne({ where: { id }, include: [Post, Note, Comments] })
+//     cb(null, user)
+//   } catch (err) {
+//     cb(err, null)
+//   }
+// }))
+
+// app.use(require('./routes'))
 
 app.engine('.hbs', require('express-handlebars').engine({ extname: '.hbs' }))
 app.set('view engine', '.hbs');
