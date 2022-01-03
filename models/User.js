@@ -31,9 +31,13 @@ const User = pls.defineUser(sequelize, {
     type: DataTypes.STRING,
     allowNull: false
   },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   totalGames: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+  
     default: 0
   },
   averageTime: {

@@ -50,6 +50,7 @@
   <script>
 
     async function registerUser(user) {
+      console.log("USer",user)
       try {
         await axios.post('/api/users/register', user)
         return true
@@ -61,7 +62,7 @@
 
     async function loginUser(user) {
       try {
-        const { data } = await axios.post('/api/users/login', user)
+        const { data } = await axios.get('/api/users/login', user)
         return data
 
       } catch (err) {
