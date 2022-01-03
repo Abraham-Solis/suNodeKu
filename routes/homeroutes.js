@@ -1,12 +1,22 @@
 const app = require("express").Router()
-// const sudoku = require('./lib/sudoku.js')
+const sudoku = require('../lib/sudoku.js')
+const passport = require('passport')
+const helpers = require('../helpers')
 
-app.get('/', (req, res) => {
-    res.render('index')
+app.get('/', async (req, res) => {
+    let viewData = {
+        isLoggedIn: req.session.loggedIn ? true : false,
+        username: req.session.loggedIn ? req.session.username : "ERROR"
+    }
+    res.render('index', viewData)
   })
 
-app.get('/mainmenu', (req, res) => {
-  res.render('mainmenu')
+app.get('/mainmenu', helpers.isLoggedIn, async (req, res) => {
+    let viewData = {
+        isLoggedIn: req.session.loggedIn ? true : false,
+        username: req.session.loggedIn ? req.session.username : "ERROR"
+    }
+  res.render('mainmenu', viewData)
 })
 
 app.get('/difficulty', (req, res) => {
@@ -43,11 +53,19 @@ app.put('/api/sudoku/:id/:cellIndex/:number', async (req, res) => {
   res.sendStatus(200);
 })
 
-app.get('/game', (req, res) => {
-  res.render('game')
+app.get('/game', helpers.isLoggedIn, async (req, res) => {
+  let viewData = {
+      isLoggedIn: req.session.loggedIn ? true : false,
+      username: req.session.loggedIn ? req.session.username : "ERROR"
+  }
+  res.render('game', viewData)
 })
 
-app.get('/leaderboard', (req, res) => {
-  res.render('leaderboard')
+app.get('/leaderboard', helpers.isLoggedIn, async (req, res) => {
+  let viewData = {
+      isLoggedIn: req.session.loggedIn ? true : false,
+      username: req.session.loggedIn ? req.session.username : "ERROR"
+  }
+  res.render('leaderboard', viewData)
 })
 module.exports = app;

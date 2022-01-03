@@ -14,7 +14,7 @@ router.post('/users/register', (req, res) => {
 router.post('/users/login', (req, res) => {
   User.authenticate()(req.body.username, req.body.password, (err, user) => {
     if (err) { console.log(err) }
- 
+    req.session.loggedIn= true
     res.json(user ? {
       username: user.username,
       token: jwt.sign({ id: user.id }, process.env.SECRET)
@@ -35,5 +35,19 @@ router.get('/users/profile', passport.authenticate('jwt'), (req, res) => res.jso
 //   const user = await User.create(body)
 //   res.json(user)
 // })
+router.get('/users/logout', async (req,res) => {
+  if(req.session.loggedIn) {
+    console.log("Logging out")
+  req.session.destroy(() => {
+    res.render('logout')
+  })
+  } else {
+  console.log("Not logged in??")
+  res.redirect('/');
+  }
+})
+
+
+
 
 module.exports = router
