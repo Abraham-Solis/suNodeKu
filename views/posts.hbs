@@ -5,7 +5,34 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
 
+let postId = localStorage.getItem('postId')
+    axios.get(`/api/posts/${postId}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then (res=> {
+        console.log(res)
+        let post = res.data
+        let postElem = document.createElement('div')
+        postElem.innerHTML = `
+        <h1> ${post.title} </h1>
+        <h3> ${post.body} <h3>
+        `
+        document.getElementById('myPost').append(postElem)
 
+        post.comments.forEach(comments=> {
+          console.log(comments)
+          
+          let commentsElem = document.createElement('div')
+          commentsElem.innerHTML = `
+          ${comments.body}
+          
+          `
+          document.getElementById('comments').append(commentsElem)
+        })
+
+      })
 
   </script>
   </body>
