@@ -22,6 +22,10 @@ app.get('/mainmenu', (req, res) => {
   res.render('mainmenu')
 })
 
+app.get('/blog', (req, res) => {
+  res.render('blog')
+})
+
 app.get('/difficulty', (req, res) => {
   res.render('difficulty')
 })
