@@ -1,47 +1,52 @@
+require('dotenv').config()
 
-// const sudoku = require('./lib/sudoku.js')
-const path = require('path');
-const express = require('express');
-const session = require('express-session');
-const exphbs = require('express-handlebars');
-const routes = require('./routes');
-const helpers = require('./utils/helpers');
+const express = require('express')
+const { join } = require('path')
 
-const sequelize = require('./db');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const passport = require('passport')
+const { User, Post, Comments } = require('./models')
+const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt')
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+const app = express()
 
-// Set up Handlebars.js engine with custom helpers
-const hbs = exphbs.create({ helpers });
+app.use(express.static(join(__dirname, 'public')))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
-const sess = {
-  secret: 'Super secret secret',
-  cookie: {},
-  resave: false,
-  saveUninitialized: true,
-  store: new SequelizeStore({
-    db: sequelize
-  })
-};
+app.use(passport.initialize())
+app.use(passport.session())
 
-app.use(session(sess));
+passport.use(User.createStrategy())
+
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
+passport.use(new JWTStrategy({
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.SECRET
+}, async function ({ id }, cb) {
+  try {
+    const user = await User.findOne({ where: { id }, include: [Post, Note] })
+    cb(null, user)
+  } catch (err) {
+    cb(err, null)
+  }
+}))
+
+app.use(require('./routes'))
+
+async function init () {
+  await require('./db').sync()
+  app.listen(process.env.PORT || 3000)
+}
+
+init()
+
 
 // Inform Express.js on which template engine to use
-app.engine('.hbs', require('express-handlebars').engine({ extname: '.hbs' }))
-app.set('view engine', '.hbs');
-app.set('views', './views');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(routes);
 
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
-});
 
 
 // app.use(require('./routes'))

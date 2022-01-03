@@ -1,4 +1,6 @@
 const app = require("express").Router()
+// const sudoku = require('./lib/sudoku.js')
+
 app.get('/', (req, res) => {
     res.render('index')
   })
