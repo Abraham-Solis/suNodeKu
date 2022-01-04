@@ -1,5 +1,5 @@
 const User = require('./User.js')
-const Post = require('./Post.js')
+const Post = require('./Puzzle.js')
 const Comments = require('./Comments.js')
 
 User.hasMany(Post, { foreignKey: 'uid' })

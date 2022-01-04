@@ -47,6 +47,11 @@ router.get('/users/logout', async (req,res) => {
   }
 })
 
+router.put('/users/profile', passport.authenticate('jwt'), async function ({ params: { id } }, res) {
+  await User.update({ where: { id } })
+  res.sendStatus(200)
+})
+
 
 
 
