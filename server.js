@@ -107,7 +107,7 @@ compressTest()
 
 
 async function init() {
-  await require('./db').sync() 
+  await require('./db').sync({force: true}) 
   app.listen(process.env.PORT ||3000)
 }
 
