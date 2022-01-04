@@ -36,7 +36,7 @@ passport.use(new JWTStrategy({
   secretOrKey: process.env.SECRET
 }, async function ({ id }, cb) {
   try {
-    const user = await User.findOne({ where: { id }, include: [Post, Note] })
+    const user = await User.findOne({ where: { id }, include: [Post, Comments] })
     cb(null, user)
   } catch (err) {
     cb(err, null)
