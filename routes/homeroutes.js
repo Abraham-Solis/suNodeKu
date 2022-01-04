@@ -23,6 +23,11 @@ app.get('/difficulty', (req, res) => {
   res.render('difficulty')
 })
 
+
+app.get('/blog', (req, res) => {
+  res.render('blog')
+})
+
 app.get('/api/sudoku/new/:difficulty', (req, res) => {
   let puzzle = sudoku.createNewPuzzle(req.params.difficulty);
   // Insert into db
