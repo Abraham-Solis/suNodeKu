@@ -30,6 +30,9 @@ html, body {
 #mainname {
     color: #6FFFE9;
 }
+main{
+    padding-bottom: 10px;
+}
 
 /* STYLING FOR MAIN MENU PAGE */
 .statsPadding {
