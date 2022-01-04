@@ -58,13 +58,6 @@ app.put('/api/sudoku/:id/:cellIndex/:number', async (req, res) => {
   res.sendStatus(200);
 })
 
-app.get('/game', helpers.isLoggedIn, async (req, res) => {
-  let viewData = {
-      isLoggedIn: req.session.loggedIn ? true : false,
-      username: req.session.loggedIn ? req.session.username : "ERROR"
-  }
-  res.render('game', viewData)
-})
 
 app.get('/leaderboard', helpers.isLoggedIn, async (req, res) => {
   let viewData = {
