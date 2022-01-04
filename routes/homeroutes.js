@@ -1,5 +1,4 @@
 const app = require("express").Router()
-const sudoku = require('../lib/sudoku.js')
 const passport = require('passport')
 const helpers = require('../helpers')
 
@@ -24,13 +23,14 @@ app.get('/difficulty', (req, res) => {
 })
 
 
-// app.get('/game', helpers.isLoggedIn, async (req, res) => {
-//   let viewData = {
-//       isLoggedIn: req.session.loggedIn ? true : false,
-//       username: req.session.loggedIn ? req.session.username : "ERROR"
-//   }
-//   res.render('game', viewData)
-// })
+app.get('/blog', helpers.isLoggedIn, async (req, res) => {
+  let viewData = {
+      isLoggedIn: req.session.loggedIn ? true : false,
+      username: req.session.loggedIn ? req.session.username : "ERROR"
+  }
+  res.render('blog', viewData)
+})
+
 
 app.get('/leaderboard', helpers.isLoggedIn, async (req, res) => {
   let viewData = {

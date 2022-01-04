@@ -2,6 +2,11 @@ body {
     font-family: 'Coming Soon', cursive !important;
 }
 
+main {
+    margin: 0px;
+    padding-bottom: 8px;
+}
+
 
 nav {
     background-color: #09BC8A;
