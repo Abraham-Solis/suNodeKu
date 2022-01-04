@@ -4,7 +4,7 @@ const passport = require('passport')
 
 // GET all posts
 router.get('/posts', passport.authenticate('jwt'), async function (req, res) {
-  const postData = await Post.findAll({ include: [User] })
+  const postData = await Post.findAll({ include: [User,Comments] })
   res.json(postData)
 })
 
@@ -18,8 +18,8 @@ router.post('/posts', passport.authenticate('jwt'), async function ({ body, user
 })
 
 // DELETE one post
-router.delete('/posts/:id', passport.authenticate('jwt'), async function ({ params: { id } }, res) {
-  await Post.destroy({ where: { id } })
+router.delete('/posts/:id', passport.authenticate('jwt'), async function (req, res) {
+  await Post.destroy({ where: { id: req.params.id } })
   res.sendStatus(200)
 })
 

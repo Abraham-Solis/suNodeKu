@@ -1,19 +1,107 @@
 <body>
-<h1>Click me to Start a post</h1>
-<button class="btn btn-primary">Post</button>
-<div id="post"></div>
+  <h1>Start Typing to begin a Post</h1>
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="email" class="form-control" id="title" placeholder="Descritption...">
+  </div>
+  <div class="mb-3">
+    <label for="body" class="form-label">Body</label>
+    <textarea class="form-control" id="body" rows="3" placeholder="Additional Details..."></textarea>
+  </div>
 
-<script>
-document.getElementById('post').innerHTML = `
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">User Name</label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="User Name">
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Example Textarea</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-</div>
-<button> Submit </button>
-`
-</script>
+  <button class="btn btn-primary" id="submit" type="submit">Submit</button>
+
+
+  <div id="title"></div>
+  <div id="body"></div>
+
+  <div id="myPost"></div>
+  <div id="comments"></div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+    function createPost() {
+      let newPost = {
+        title: document.getElementById('title').value,
+        body: document.getElementById('body').value
+      }
+      axios.post('/api/posts', newPost, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+        .then(res => {
+          console.log(res)
+        })
+    }
+
+    document.getElementById("submit").addEventListener('click', event => {
+      event.preventDefault()
+      createPost()
+    })
+
+    axios.get('/api/posts', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => {
+
+        console.log(res.data)
+        let posts = res.data
+        posts.forEach(post => {
+          let postElem = document.createElement('div')
+          postElem.innerHTML = `
+            <h3 class="goToPost" data-postid="${post.id}"> ${post.title} </h3>
+            <h5> posted by ${post.User.username} </h5>
+            <p> ${post.body} </p>
+            `
+          document.getElementById('posts').prepend(postElem)
+        })
+
+      })
+
+    document.addEventListener('click', event => {
+      if (event.target.classList.contains('goToPost')) {
+        console.log('ping')
+        localStorage.setItem('postId', event.target.dataset.postid)
+        location = '/blog.hbs'
+      }
+    })
+
+    let postId = localStorage.getItem('postId')
+    axios.get(`/api/posts/${postId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => {
+        console.log(res)
+        let post = res.data
+        let postElem = document.createElement('div')
+        postElem.innerHTML = `
+        <h1> ${post.title} </h1>
+        <h3> ${post.body} <h3>
+        `
+        document.getElementById('myPost').append(postElem)
+
+        post.comments.forEach(comments => {
+          console.log(comments)
+
+          let commentsElem = document.createElement('div')
+          commentsElem.innerHTML = `
+          ${comments.body}
+          
+          `
+          document.getElementById('comments').append(commentsElem)
+        })
+
+      })
+
+  </script>
+
+</body>
+
 </main>
