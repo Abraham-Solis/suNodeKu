@@ -62,13 +62,13 @@ app.get('/blog', helpers.isLoggedIn, async (req, res) => {
   res.render('blog', viewData)
 })
 
-app.get('/game', helpers.isLoggedIn, async (req, res) => {
-  let viewData = {
-      isLoggedIn: req.session.loggedIn ? true : false,
-      username: req.session.loggedIn ? req.session.username : "ERROR"
-  }
-  res.render('game', viewData)
-})
+// app.get('/game', helpers.isLoggedIn, async (req, res) => {
+//   let viewData = {
+//       isLoggedIn: req.session.loggedIn ? true : false,
+//       username: req.session.loggedIn ? req.session.username : "ERROR"
+//   }
+//   res.render('game', viewData)
+// })
 
 app.get('/leaderboard', helpers.isLoggedIn, async (req, res) => {
   let viewData = {
