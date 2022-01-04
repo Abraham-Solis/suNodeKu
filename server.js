@@ -1,72 +1,70 @@
-// require('dotenv').config()
+require('dotenv').config()
 
 const express = require('express')
 const { join } = require('path')
-const sudoku = require('./lib/sudoku.js')
+
+const passport = require('passport')
+const { User, Post, Comments } = require('./models')
+const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt')
 
 const app = express()
 
-app.use(express.static(join(__dirname, "public")))
+app.use(express.static(join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+
 
 app.engine('.hbs', require('express-handlebars').engine({ extname: '.hbs' }))
 app.set('view engine', '.hbs');
 app.set('views', './views');
 
-app.get('/', (req, res) => {
-    res.render('index')
-  })
+const session = require('express-session')
+app.use(session({ secret: process.env.SECRET, maxAge:60*60*1000, resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false, maxAge: 60*60*1000 } }));
+  
+app.use(passport.initialize())
+app.use(passport.session())
 
-app.get('/mainmenu', (req, res) => {
-  res.render('mainmenu')
-})
+passport.use(User.createStrategy())
 
-app.get('/blog', (req, res) => {
-  res.render('blog')
-})
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
-app.get('/difficulty', (req, res) => {
-  res.render('difficulty')
-})
-
-app.get('/api/sudoku/new/:difficulty', (req, res) => {
-  let puzzle = sudoku.createNewPuzzle(req.params.difficulty);
-  // Insert into db
-  res.json(puzzle);
-})
-
-app.get('/api/sudoku/:id', async (req, res) => {
-  // Fetch puzzle from mysql by req.param.db
-  /*
-    let game = await Game.fetchAll({where: {id: req.param.id}}).then();
-    let puzzle = sudoku.createFromDB(game.gameData);
-    res.json(puzzle)
-  */
-  let puzzle = {}
-  res.json(puzzle);
-})
-
-app.put('/api/sudoku/:id/:cellIndex/:number', async (req, res) => {
-  /*
-  let game = await Game.fetchAll({where: {id: req.param.id}}) 
-  let puzzle = sudoku.createFromDB(game.gameData)
-  if(puzzle.given[req.params.cellIndex] === 0) {
-    puzzle.board[req.params.cellIndex] = req.params.number
+passport.use(new JWTStrategy({
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.SECRET
+}, async function ({ id }, cb) {
+  try {
+    const user = await User.findOne({ where: { id }, include: [Post, Note] })
+    cb(null, user)
+  } catch (err) {
+    cb(err, null)
   }
-  let gameData = puzzle.compress()
-  Game.update({gameData: puzzle.compress}, {where: {id: req.params.id}}) 
-  */
-  res.sendStatus(200);
-})
+}))
 
-app.get('/game', (req, res) => {
-  res.render('game')
-})
+app.use(require('./routes'))
 
-app.get('/leaderboard', (req, res) => {
-  res.render('leaderboard')
-})
+async function init () {
+  await require('./db').sync()
+  app.listen(process.env.PORT || 3000)
+}
+
+init()
+
+
+// Inform Express.js on which template engine to use
+
+
+
+
+
+// app.use(require('./routes'))
+
+// app.engine('.hbs', require('express-handlebars').engine({ extname: '.hbs' }))
+// app.set('view engine', '.hbs');
+// app.set('views', './views');
+
 
 
 
@@ -83,4 +81,6 @@ let compressTest = () => {
 compressTest()
 */
 
-app.listen(3000)
+
+
+// app.listen(3000)

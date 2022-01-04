@@ -1,0 +1,14 @@
+<script>
+ async function logoutUser () {
+        localStorage.removeItem('username')
+        localStorage.removeItem('token')
+        location = '/'
+      }
+
+ document.getElementById('logout').addEventListener('click', logoutUser)
+
+
+
+
+
+</script>

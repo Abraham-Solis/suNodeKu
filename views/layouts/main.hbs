@@ -38,6 +38,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/"><i class="fas fa-user"></i></a>
                             </li>
+                                    <li class="nav-item">
+                                <a class="nav-link" href="/mainmenu"><i class="fas fa-address-card"></i></a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/game"><i class="fas fa-play"></i></a>
                             </li>
@@ -45,10 +48,11 @@
                                 <a class="nav-link" href="/leaderboard"><i class="fas fa-trophy"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/mainmenu"><i class="fas fa-address-card"></i></a>
+                                <a class="nav-link" href="/blog"><i class="fas fa-paste"></i></a>
+                            </li>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i></a>
+                                <a class="nav-link" id="logout" href="/api/users/logout"><i class="fas fa-sign-out-alt"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -68,7 +72,8 @@
       <li class="nav-item"><a href="/mainmenu" class="nav-link px-2">Profile</a></li>
       <li class="nav-item"><a href="/game" class="nav-link px-2">Play</a></li>
       <li class="nav-item"><a href="/leaderboard" class="nav-link px-2">Leaderboard</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2">Logout</a></li>
+      <li class="nav-item"><a href="/blog" class="nav-link px-2">Blog</a></li>
+      <li class="nav-item"><a href="/api/users/logout" id="logout" class="nav-link px-2">Logout</a></li>
     </ul>
     <p class="text-center">© 2021 Company, Inc</p>
   </footer>
