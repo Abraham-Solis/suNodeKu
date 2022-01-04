@@ -84,7 +84,8 @@
 <script>
     let selected = null;
     let currentPuzzle = null;
-
+    let puzzleId = null;
+    
     let isGiven = () => {
         if (selected) {
             return selected.className.split(' ').includes('given')
@@ -101,7 +102,16 @@
             selected = event.target;
         } else if (event.target.className === "num" && selected) {
             if (!isGiven()) {
-                selected.innerHTML = event.target.innerHTML;
+                
+                axios.put(`/api/sudoku/${puzzleId}`, {
+                    cellIndex: selected.id,
+                    number: parseInt(event.target.innerHTML)
+                }).then(res => {
+                    selected.innerHTML = event.target.innerHTML;
+                }).catch(err => {
+                    alert("Invalid move.")
+                })
+
             }
         }
     })
@@ -123,6 +133,7 @@
         if(state === "new-puzzle") {
             axios.get(`/api/sudoku/new/{{difficulty}}`).then(res => {
                 currentPuzzle = res.data;
+                puzzleId = res.data.puzzleId;
 
                 let sudoku_grid = document.getElementById('sudoku_grid');
 
@@ -156,6 +167,7 @@
         } else if(state == "load-game") {
             axios.get(`/api/sudoku/{{puzzleId}}`).then(res => {
                 currentPuzzle = res.data;
+                puzzleId = res.data.puzzleId;
 
                 let sudoku_grid = document.getElementById('sudoku_grid');
 

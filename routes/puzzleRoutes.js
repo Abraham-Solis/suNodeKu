@@ -10,9 +10,11 @@ app.get('/api/sudoku/new/:difficulty', (req, res) => {
   
   let compressedData = puzzle.compress().join('');
   console.log("Data Length: " + compressedData.length)
-  let puzzleDBEntry = Puzzles.create({difficulty: req.params.difficulty, data: compressedData})
+  let puzzleDBEntry = Puzzles.create({difficulty: req.params.difficulty, data: compressedData}).then(dbEntry => {
+    puzzle.puzzleId = dbEntry.dataValues.id;
+    res.json(puzzle);
+  })
   
-  res.json(puzzle);
 })
 
 
@@ -21,6 +23,7 @@ app.get('/api/sudoku/:id', async (req, res) => {
     // Fetch puzzle from mysql by req.param.db
     let puzzleDBEntry = Puzzles.findOne({where: {id: req.params.id}}).then(dbEntry => {
         let puzzle = sudoku.createFromDB(dbEntry.dataValues.data);
+        puzzle.puzzleId = dbEntry.dataValues.id;
         res.json(puzzle);
     }).catch(err => {
         console.log(err);
@@ -29,17 +32,25 @@ app.get('/api/sudoku/:id', async (req, res) => {
 })
 
 // API call for a move
-app.put('/api/sudoku/:id/:cellIndex/:number', async (req, res) => {
-  /*
-  let game = await Game.fetchAll({where: {id: req.param.id}}) 
-  let puzzle = sudoku.createFromDB(game.gameData)
-  if(puzzle.given[req.params.cellIndex] === 0) {
-    puzzle.board[req.params.cellIndex] = req.params.number
-  }
-  let gameData = puzzle.compress()
-  Game.update({gameData: puzzle.compress}, {where: {id: req.params.id}}) 
-  */
-  res.sendStatus(200);
+app.put('/api/sudoku/:id', async (req, res) => {
+    let cellIndex = req.body.cellIndex;
+    let number = req.body.number;
+
+    let puzzleDBEntry = Puzzles.findOne({where: {id: req.params.id}}).then(async dbEntry => {
+        let puzzle = sudoku.createFromDB(dbEntry.dataValues.data);
+        if(puzzle.given[cellIndex] > 0) {
+            console.log(`!! Invalid move! Puzzle id: ${req.params.id} at cell ${cellIndex}` );
+            res.send(500).json({invalidMove: cellIndex});
+        } else {
+            puzzle.board[cellIndex] = number;
+            await Puzzles.update({data: puzzle.compress().join('')}, {where: {id: req.params.id}});
+            res.sendStatus(200)
+        }
+
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500)
+    })
 })
 
 
