@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +20,7 @@
 
 <body>
 
-{{!-- nav bar with font awesome icons --}}
+    {{!-- nav bar with font awesome icons --}}
     <nav class="navbar-expand-lg shadow">
         <div class="container">
             <div class="row">
@@ -38,7 +39,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/"><i class="fas fa-user"></i></a>
                             </li>
-                                    <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="/mainmenu"><i class="fas fa-address-card"></i></a>
                             </li>
                             <li class="nav-item">
@@ -52,7 +53,8 @@
                             </li>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="logout" href="/api/users/logout"><i class="fas fa-sign-out-alt"></i></a>
+                                <a class="nav-link" id="logout" href="/api/users/logout"><i
+                                        class="fas fa-sign-out-alt"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -64,25 +66,26 @@
 
     {{{body}}}
 
-<br>
-{{!-- attempt at sticky footer --}}
-<footer class="p-4 mt-auto">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="/" class="nav-link px-2">Login</a></li>
-      <li class="nav-item"><a href="/mainmenu" class="nav-link px-2">Profile</a></li>
-      <li class="nav-item"><a href="/game" class="nav-link px-2">Play</a></li>
-      <li class="nav-item"><a href="/leaderboard" class="nav-link px-2">Leaderboard</a></li>
-      <li class="nav-item"><a href="/blog" class="nav-link px-2">Blog</a></li>
-      <li class="nav-item"><a href="/api/users/logout" id="logout" class="nav-link px-2">Logout</a></li>
-    </ul>
-    <p class="text-center">© 2021 Company, Inc</p>
-  </footer>
+    <br>
+    {{!-- attempt at sticky footer --}}
+    <footer class="p-4 mt-auto">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="/" class="nav-link px-2">Login</a></li>
+            <li class="nav-item"><a href="/mainmenu" class="nav-link px-2">Profile</a></li>
+            <li class="nav-item"><a href="/game" class="nav-link px-2">Play</a></li>
+            <li class="nav-item"><a href="/leaderboard" class="nav-link px-2">Leaderboard</a></li>
+            <li class="nav-item"><a href="/blog" class="nav-link px-2">Blog</a></li>
+            <li class="nav-item"><a href="/api/users/logout" id="logout" class="nav-link px-2">Logout</a></li>
+        </ul>
+        <p class="text-center">© 2021 Company, Inc</p>
+    </footer>
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 </body>
-</html >
+
+</html>
