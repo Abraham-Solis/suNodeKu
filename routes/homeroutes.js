@@ -58,7 +58,15 @@ app.put('/api/sudoku/:id/:cellIndex/:number', async (req, res) => {
 })
 
 
-// app.get('/blog', helpers.isLoggedIn, async (req, res) => {
+app.get('/blog', helpers.isLoggedIn, async (req, res) => {
+  let viewData = {
+    isLoggedIn: req.session.loggedIn ? true : false,
+    username: req.session.loggedIn ? req.session.username : "ERROR",
+}
+
+res.render('blog', viewData)
+})
+
 // Route for loading an existing game
 app.get('/sudoku/:id', helpers.isLoggedIn, async (req, res) => {
 
@@ -84,7 +92,7 @@ app.get('/sudoku/new/:difficulty', helpers.isLoggedIn, async (req, res) => {
       difficulty: difficulty 
 
   }
-  res.render('blog', viewData)
+
 
   res.render('game', viewData)
 })
