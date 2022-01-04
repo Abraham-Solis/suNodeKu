@@ -11,10 +11,10 @@ app.get('/', async (req, res) => {
   })
 
 app.get('/mainmenu', helpers.isLoggedIn, async (req, res) => {
-    let viewData = {
-        isLoggedIn: req.session.loggedIn ? true : false,
-        username: req.session.loggedIn ? req.session.username : "ERROR"
-    }
+  let viewData = {
+      isLoggedIn: req.session.loggedIn ? true : false,
+      username: req.session.loggedIn ? req.session.username : "ERROR"
+  }
   res.render('mainmenu', viewData)
 })
 
