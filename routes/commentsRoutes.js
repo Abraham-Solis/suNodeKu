@@ -4,20 +4,20 @@ const passport = require('passport')
 
 // GET all posts
 router.get('/comments', passport.authenticate('jwt'), async function (req, res) {
-  const comments = await Comments.findAll({ include: [User, Post] })
-  res.json(comments)
+  const commentData = await Comments.findAll({ include: [User, Post] })
+  res.json(commentData)
 })
 
 
 
 // POST one post
 router.post('/comments', passport.authenticate('jwt'), async function (req, res) {
-  const comment = await Comments.create({
+  const commentData = await Comments.create({
     body: req.body.body,
     pid: req.body.pid,
     uid: req.user.id
   })
-  res.json(comment)
+  res.json(commentData)
 })
 
 // DELETE one post
