@@ -84,7 +84,8 @@
 <script>
     let selected = null;
     let currentPuzzle = null;
-
+    let puzzleId = null;
+    
     let isGiven = () => {
         if (selected) {
             return selected.className.split(' ').includes('given')
@@ -101,7 +102,16 @@
             selected = event.target;
         } else if (event.target.className === "num" && selected) {
             if (!isGiven()) {
-                selected.innerHTML = event.target.innerHTML;
+                
+                axios.put(`/api/sudoku/${puzzleId}`, {
+                    cellIndex: selected.id,
+                    number: parseInt(event.target.innerHTML)
+                }).then(res => {
+                    selected.innerHTML = event.target.innerHTML;
+                }).catch(err => {
+                    alert("Invalid move.")
+                })
+
             }
         }
     })
@@ -123,6 +133,7 @@
         if(state === "new-puzzle") {
             axios.get(`/api/sudoku/new/{{difficulty}}`).then(res => {
                 currentPuzzle = res.data;
+                puzzleId = res.data.puzzleId;
 
                 let sudoku_grid = document.getElementById('sudoku_grid');
 
@@ -154,7 +165,39 @@
                 }
             })
         } else if(state == "load-game") {
+            axios.get(`/api/sudoku/{{puzzleId}}`).then(res => {
+                currentPuzzle = res.data;
+                puzzleId = res.data.puzzleId;
 
+                let sudoku_grid = document.getElementById('sudoku_grid');
+
+                for (let y = 0; y < 9; y++) {
+                    let row = document.createElement('tr');
+
+                    if (y == 2 || y == 5) {
+                        row.style.borderBottom = "3px solid #000";
+                    }
+
+                    for (let x = 0; x < 9; x++) {
+                        let column = document.createElement('td');
+                        let index = x + (y * 9);
+                        column.id = index;
+                        column.className = "cell"
+                        if (currentPuzzle.given[index]) {
+                            column.className = " given";
+                        }
+                        if (!currentPuzzle.blank[index]) {
+                            column.innerHTML = currentPuzzle.board[index];
+                        }
+
+                        if (x == 2 || x == 5) {
+                            column.style.borderRight = "3px solid #000";
+                        }
+                        row.append(column);
+                    }
+                    sudoku_grid.append(row);
+                }
+            })
 
 
         }
