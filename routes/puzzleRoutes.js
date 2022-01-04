@@ -19,14 +19,13 @@ app.get('/api/sudoku/new/:difficulty', (req, res) => {
 // API call for loading a puzzle from the DB
 app.get('/api/sudoku/:id', async (req, res) => {
     // Fetch puzzle from mysql by req.param.db
-    let puzzleDBEntry = Puzzles.findOne({where: {id: req.params.id}});
-
-    console.log(puzzleDBEntry.data);
-
-    //sudoku.createFromDB(puzzleDBEntry.data)
-    let puzzle = {};
-
-  res.json(puzzle);
+    let puzzleDBEntry = Puzzles.findOne({where: {id: req.params.id}}).then(dbEntry => {
+        let puzzle = sudoku.createFromDB(dbEntry.dataValues.data);
+        res.json(puzzle);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500)
+    });
 })
 
 // API call for a move
@@ -51,10 +50,10 @@ app.get('/sudoku/:id', helpers.isLoggedIn, async (req, res) => {
       isLoggedIn: req.session.loggedIn ? true : false,
       username: req.session.loggedIn ? req.session.username : "ERROR",
       state: "load-puzzle",
+      puzzleId: req.params.id
   }
 
   res.render('game', viewData)
-  
 }) 
 
 // Route for starting a new game
