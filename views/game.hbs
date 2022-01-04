@@ -47,7 +47,7 @@
     }
 </style>
 
-<body class="gameBackground">
+<main class="gameBackground">
 
     <h1 class="gameTitle">Good Luck!</h1>
 
@@ -77,21 +77,7 @@
 
 
 
-</body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</main>
 
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -131,37 +117,49 @@
         }
     })
 
-    axios.get("/api/sudoku/new/easy").then(res => {
-        currentPuzzle = res.data;
 
-        let sudoku_grid = document.getElementById('sudoku_grid');
+    function init() {
+        let state = "{{state}}"
+        if(state === "new-puzzle") {
+            axios.get(`/api/sudoku/new/{{difficulty}}`).then(res => {
+                currentPuzzle = res.data;
 
-        for (let y = 0; y < 9; y++) {
-            let row = document.createElement('tr');
+                let sudoku_grid = document.getElementById('sudoku_grid');
 
-            if (y == 2 || y == 5) {
-                row.style.borderBottom = "3px solid #000";
-            }
+                for (let y = 0; y < 9; y++) {
+                    let row = document.createElement('tr');
 
-            for (let x = 0; x < 9; x++) {
-                let column = document.createElement('td');
-                let index = x + (y * 9);
-                column.id = index;
-                column.className = "cell"
-                if (currentPuzzle.given[index]) {
-                    column.className = " given";
+                    if (y == 2 || y == 5) {
+                        row.style.borderBottom = "3px solid #000";
+                    }
+
+                    for (let x = 0; x < 9; x++) {
+                        let column = document.createElement('td');
+                        let index = x + (y * 9);
+                        column.id = index;
+                        column.className = "cell"
+                        if (currentPuzzle.given[index]) {
+                            column.className = " given";
+                        }
+                        if (!currentPuzzle.blank[index]) {
+                            column.innerHTML = currentPuzzle.board[index];
+                        }
+
+                        if (x == 2 || x == 5) {
+                            column.style.borderRight = "3px solid #000";
+                        }
+                        row.append(column);
+                    }
+                    sudoku_grid.append(row);
                 }
-                if (!currentPuzzle.blank[index]) {
-                    column.innerHTML = currentPuzzle.board[index];
-                }
+            })
+        } else if(state == "load-game") {
 
-                if (x == 2 || x == 5) {
-                    column.style.borderRight = "3px solid #000";
-                }
-                row.append(column);
-            }
-            sudoku_grid.append(row);
+
+
         }
-    })
+    }
+
+    init();
 
 </script>

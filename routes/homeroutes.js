@@ -23,12 +23,15 @@ app.get('/difficulty', (req, res) => {
   res.render('difficulty')
 })
 
+// API call for new Puzzle
 app.get('/api/sudoku/new/:difficulty', (req, res) => {
   let puzzle = sudoku.createNewPuzzle(req.params.difficulty);
   // Insert into db
   res.json(puzzle);
 })
 
+
+// API call for loading a puzzle from the DB
 app.get('/api/sudoku/:id', async (req, res) => {
   // Fetch puzzle from mysql by req.param.db
   /*
@@ -40,6 +43,7 @@ app.get('/api/sudoku/:id', async (req, res) => {
   res.json(puzzle);
 })
 
+// API call for a move
 app.put('/api/sudoku/:id/:cellIndex/:number', async (req, res) => {
   /*
   let game = await Game.fetchAll({where: {id: req.param.id}}) 
@@ -54,12 +58,35 @@ app.put('/api/sudoku/:id/:cellIndex/:number', async (req, res) => {
 })
 
 
-app.get('/blog', helpers.isLoggedIn, async (req, res) => {
+// app.get('/blog', helpers.isLoggedIn, async (req, res) => {
+// Route for loading an existing game
+app.get('/sudoku/:id', helpers.isLoggedIn, async (req, res) => {
+
   let viewData = {
       isLoggedIn: req.session.loggedIn ? true : false,
-      username: req.session.loggedIn ? req.session.username : "ERROR"
+      username: req.session.loggedIn ? req.session.username : "ERROR",
+      state: "load-puzzle",
+  }
+
+  res.render('game', viewData)
+  
+}) 
+
+// Route for starting a new game
+app.get('/sudoku/new/:difficulty', helpers.isLoggedIn, async (req, res) => {
+
+  let difficulty = req.params.difficulty;
+
+  let viewData = {
+      isLoggedIn: req.session.loggedIn ? true : false,
+      username: req.session.loggedIn ? req.session.username : "ERROR",
+      state: "new-puzzle",
+      difficulty: difficulty 
+
   }
   res.render('blog', viewData)
+
+  res.render('game', viewData)
 })
 
 // app.get('/game', helpers.isLoggedIn, async (req, res) => {
