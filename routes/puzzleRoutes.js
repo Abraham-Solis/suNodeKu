@@ -10,7 +10,8 @@ app.get('/api/sudoku/new/:difficulty', (req, res) => {
   
   let compressedData = puzzle.compress().join('');
   console.log("Data Length: " + compressedData.length)
-  let puzzleDBEntry = Puzzles.create({difficulty: req.params.difficulty, data: compressedData}).then(dbEntry => {
+  console.log(req.session)
+  let puzzleDBEntry = Puzzles.create({difficulty: req.params.difficulty, data: compressedData, uid: req.session.userId}).then(dbEntry => {
     puzzle.puzzleId = dbEntry.dataValues.id;
     res.json(puzzle);
   })
