@@ -54,9 +54,9 @@
         posts.forEach(post => {
           let postElem = document.createElement('div')
           postElem.innerHTML = `
-            <h3 class="goToPost" data-postid="${post.id}"> ${post.title} </h3>
-            <h5> posted by ${post.User.username} </h5>
-            <p> ${post.body} </p>
+            <h3 class="goToPost" data-postid="${posts.id}"> ${posts.title} </h3>
+            <h5> posted by ${posts.User.username} </h5>
+            <p> ${posts.body} </p>
             `
           document.getElementById('posts').prepend(postElem)
         })
@@ -82,8 +82,8 @@
         let post = res.data
         let postElem = document.createElement('div')
         postElem.innerHTML = `
-        <h1> ${post.title} </h1>
-        <h3> ${post.body} <h3>
+        <h1> ${posts.title} </h1>
+        <h3> ${posts.body} <h3>
         `
         document.getElementById('myPost').append(postElem)
 
