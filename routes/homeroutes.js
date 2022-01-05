@@ -3,12 +3,18 @@ const passport = require('passport')
 const helpers = require('../helpers')
 
 app.get('/', async (req, res) => {
-    let viewData = {
-        isLoggedIn: req.session.loggedIn ? true : false,
-        username: req.session.loggedIn ? req.session.username : "ERROR"
+
+    if(req.session.loggedIn) {
+      res.redirect("/mainmenu")
+    } else {
+      let viewData = {
+          isLoggedIn: req.session.loggedIn ? true : false,
+          username: req.session.loggedIn ? req.session.username : "ERROR"
+      }
+      res.render('index', viewData)
+
     }
-    res.render('index', viewData)
-  })
+})
 
 app.get('/mainmenu', helpers.isLoggedIn, async (req, res) => {
   let viewData = {

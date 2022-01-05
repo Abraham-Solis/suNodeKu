@@ -115,8 +115,8 @@
     })
 
     document.addEventListener('click', event => {
-      event.preventDefault()
       if (event.target.className.split(" ").includes("submitComment")) {
+        event.preventDefault()
         let postId = event.target.dataset.postid
         let commentBody = document.getElementById(`comment-${postId}`).value
         let newComment = {
