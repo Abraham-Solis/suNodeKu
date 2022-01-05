@@ -42,7 +42,7 @@ app.put('/api/sudoku/:id', async (req, res) => {
         console.log(puzzle)
         if(puzzle.given[cellIndex] > 0) {
             console.log(`!! Invalid move! Puzzle id: ${req.params.id} at cell ${cellIndex}` );
-            res.sendStatus(500).json({invalidMove: cellIndex});
+            res.json({invalidMove: cellIndex});
         } else {
             puzzle.board[cellIndex] = number;
             puzzle.blank[cellIndex] = 0;
