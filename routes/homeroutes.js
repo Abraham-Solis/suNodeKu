@@ -22,6 +22,9 @@ app.get('/difficulty', (req, res) => {
   res.render('difficulty')
 })
 
+app.get('/continuedgame', (req, res) => {
+  res.render('continuedgame')
+})
 
 app.get('/blog', helpers.isLoggedIn, async (req, res) => {
   let viewData = {
