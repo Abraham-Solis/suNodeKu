@@ -1,0 +1,147 @@
+<main class="leaderboard-background container" style="color:white">
+  <div id="content">
+
+    <h1>Leaderboard</h1>
+    <ul class="list-group" style="margin-bottom: 2em;">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold" style="font-size: 2rem">{{leaderboard.mostGamesPlayed.username}}</div>
+          Most Games Played
+        </div>
+        <div class="badge bg-secondary rounded-pill" style="font-size:24pt">{{leaderboard.mostGamesPlayed.count}}</div>
+      </li>
+
+      <li class="list-group-item d-flex justify-content-between align-items-start statsEasy">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold" style="font-size: 2rem">{{leaderboard.easyGamesPlayed.username}}</div>
+          Easy Games Finished
+        </div>
+        <div class="badge bg-secondary rounded-pill" style="font-size:24pt">{{leaderboard.easyGamesPlayed.count}}</div>
+      </li>
+
+      <li class="list-group-item d-flex justify-content-between align-items-start statsMedium">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold" style="font-size: 2rem">{{leaderboard.mediumGamesPlayed.username}}</div>
+          Medium Games Finished
+        </div>
+        <div class="badge bg-secondary rounded-pill" style="font-size:24pt">{{leaderboard.mediumGamesPlayed.count}}</div>
+      </li>
+      
+      <li class="list-group-item d-flex justify-content-between align-items-start statsHard">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold" style="font-size: 2rem">{{leaderboard.hardGamesPlayed.username}}</div>
+          Hard Games Finished
+        </div>
+        <div class="badge bg-secondary rounded-pill" style="font-size:24pt">{{leaderboard.hardGamesPlayed.count}}</div>
+      </li>
+      
+      <li class="list-group-item d-flex justify-content-between align-items-start statsExpert">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold" style="font-size: 2rem">{{leaderboard.expertGamesPlayed.username}}</div>
+          Expert Games Finished
+        </div>
+        <div class="badge bg-secondary rounded-pill" style="font-size:24pt">{{leaderboard.expertGamesPlayed.count}}</div>
+      </li>
+    </ul>
+    
+    <h1>User stats</h1>
+    {{#each eachUserStats}}
+      <h3>{{username}}</h3>
+
+      <ul class="list-group" style="margin-bottom: 2em; width:60%">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          Most Games Played
+        </div>
+        <div class="badge bg-secondary rounded-pill" style="font-size:16pt">{{totalCompletedPuzzles}}</div>
+      </li>
+
+      <li class="list-group-item d-flex justify-content-between align-items-start statsEasy">
+        <div class="ms-2 me-auto">
+          Easy Games Finished
+        </div>
+        <div class="badge bg-secondary rounded-pill" style="font-size:16pt">{{totalEasyPuzzles}}</div>
+      </li>
+
+      <li class="list-group-item d-flex justify-content-between align-items-start statsMedium">
+        <div class="ms-2 me-auto">
+          Medium Games Finished
+        </div>
+        <div class="badge bg-secondary rounded-pill" style="font-size:16pt">{{totalMedPuzzles}}</div>
+      </li>
+      
+      <li class="list-group-item d-flex justify-content-between align-items-start statsHard">
+        <div class="ms-2 me-auto">
+          Hard Games Finished
+        </div>
+        <div class="badge bg-secondary rounded-pill" style="font-size:16pt">{{totalHardPuzzles}}</div>
+      </li>
+      
+      <li class="list-group-item d-flex justify-content-between align-items-start statsExpert">
+        <div class="ms-2 me-auto">
+          Expert Games Finished
+        </div>
+        <div class="badge bg-secondary rounded-pill" style="font-size:16pt">{{totalExpertPuzzles}}</div>
+      </li>
+    </ul>
+
+    {{/each}}
+
+  </div>
+  <script>
+
+//logic for figuring out which username has highest totalGames, lowest averageTime, lowest fastestTime
+
+
+
+//function for getting info
+  async function renderLeaderboard() {
+//logic in the callback function
+    }
+    /*
+    document.getElementById('content').innerHTML = `
+    <h1>Leaderboard</h1>
+    <br><hr><br>
+    <h3>Easy</h3>  
+    <h5>Most Completed Games</h5>
+    <h5>${username} ~ ${totalGames}</h5>
+    <br>
+    <h5>Best Average Time</h5>
+    <h5>${username} ~ ${averageTime}</h5>
+    <br>
+    <h5>Fastest Time</h5>
+    <h5>${username} ~ ${fastestTime}</h5>
+    <br><br>
+    <h3>Medium</h3>
+    <h5>Most Completed Games</h5>
+    <h5>${username} ~ ${totalGames}</h5>
+    <br>
+    <h5>Best Average Time</h5>
+    <h5>${username} ~ ${averageTime}</h5>
+    <br>
+    <h5>Fastest Time</h5>
+    <h5>${username} ~ ${fastestTime}</h5>
+    <br><br>
+    <h3>Hard</h3>
+    <h5>Most Completed Games</h5>
+    <h5>${username} ~ ${totalGames}</h5>
+    <br>
+    <h5>Best Average Time</h5>
+    <h5>${username} ~ ${averageTime}</h5>
+    <br>
+    <h5>Fastest Time</h5>
+    <h5>${username} ~ ${fastestTime}</h5>
+    <br><br>
+    <h3>Expert</h3>
+    <h5>Most Completed Games</h5>
+    <h5>${username} ~ ${totalGames}</h5>
+    <br>
+    <h5>Best Average Time</h5>
+    <h5>${username} ~ ${averageTime}</h5>
+    <br>
+    <h5>Fastest Time</h5>
+    <h5>${username} ~ ${fastestTime}</h5>
+    <br><br>`*/
+    
+  </script>
+</main>

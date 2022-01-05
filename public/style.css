@@ -1,0 +1,158 @@
+body {
+    font-family: 'Coming Soon', cursive !important;
+    background-color: #3A506B !important;
+}
+
+main {
+    margin: 0px;
+    padding-bottom: 12px;
+}
+
+
+nav {
+    background-color: #09BC8A;
+}
+
+footer {
+    background-color: #09BC8A;
+}
+
+a {
+    color: #212529 !important;
+}
+
+#jumbo {
+    background-color: #508991 !important;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+#mainname {
+    color: #6FFFE9;
+}
+main{
+    padding-bottom: 10px;
+}
+
+/* STYLING FOR MAIN MENU PAGE */
+.statsPadding {
+    padding-top: 19px;
+    padding-bottom: 2em;
+}
+
+.statsBackground {
+    background-color: #3A506B !important;
+}
+
+.statsWelcome {
+    font-size: 90px;
+    color: #6FFFE9;
+}
+
+.statsSubHeading {
+    font-size: 45px;
+    color: #5BC0BE;
+}
+
+.statsEasy {
+    background-color: #99d98c !important;
+}
+
+.statsMedium {
+    background-color: #fcbf49 !important;
+}
+
+.statsHard {
+    background-color: #d62828 !important;
+}
+
+.statsExpert {
+    background-color: #800016 !important;
+    color:#FFF !important;
+}
+
+.statsText {
+    font-size: 30px;
+}
+
+.statsHeading {
+    font-weight: bold;
+    padding-bottom: 25px;
+}
+
+.achievementCenter {
+    text-align: center;
+}
+
+.achievementCard {
+    justify-content: center;
+}
+
+.achievementHeader {
+    font-weight: bold;
+
+}
+
+/* STYLING FOR DIFFICULTY PAGE */
+
+.difficultyBackground {
+    background-color: #3A506B;
+}
+
+.buttonSpacer {
+    padding-top: 25px;
+    padding-bottom: 15px;
+}
+
+.buttonEasy {
+    background-color: #99d98c;
+}
+
+.buttonMedium {
+    background-color: #fcbf49;
+}
+
+.buttonHard {
+    background-color: #d62828;
+}
+
+
+.buttonExpert {
+    background-color: #800016;
+}
+
+.difficultyText {
+    color: #6FFFE9;
+    font-size: 90px;
+    padding-top: 20px;
+    padding-bottom: 90px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+/* GAME PAGE  */
+
+.gameBackground {
+    background-color: #3A506B;
+}
+
+.gameTitle {
+    color: #6FFFE9;
+    font-size: 90px;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 50px;
+}
+
+/* Leaderboard page */
+
+.leaderboard-background {
+    background-color: #3A506B;
+}
+

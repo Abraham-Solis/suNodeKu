@@ -1,0 +1,39 @@
+{
+  "name": "sunodeku",
+  "version": "1.0.0",
+  "description": "This is bradley's test commit",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abraham-Solis/suNodeKu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abraham-Solis/suNodeKu/issues"
+  },
+  "homepage": "https://github.com/Abraham-Solis/suNodeKu#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "connect-session-sequelize": "^7.1.2",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "express-handlebars": "^6.0.2",
+    "express-session": "^1.17.2",
+    "handlebars": "^4.7.7",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local-sequelize": "^0.9.0",
+    "sequelize": "^6.12.4",
+    "sudoku-gen": "^1.0.0",
+    "timer-node": "^5.0.5"
+  }
+}

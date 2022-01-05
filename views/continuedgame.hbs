@@ -1,0 +1,72 @@
+<style>
+    table#sudoku_grid {
+        width: 100%;
+    }
+
+    table#sudoku_grid tr,
+    table#sudoku_grid td {
+        border: 1px solid #000;
+        text-align: center;
+        font-size: 18pt;
+        font-weight: bold;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        table#sudoku_grid tr,
+        table#sudoku_grid td {
+            font-size: 12pt;
+        }
+    }
+
+    table#sudoku_grid td {
+        width: 11.1%;
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+        vertical-align: middle;
+    }
+
+    .selected {
+        background-color: #6FFFE9;
+    }
+
+    .wrong {
+        background-color: red;
+    }
+
+    .given {
+        background-color: lightgray;
+    }
+
+    button {
+        width: 2em;
+    }
+
+    #check_answers {
+        width: 6em;
+    }
+</style>
+
+<main class="continuedGame container">
+
+    <h1 style="color: #6FFFE9">Continue a game</h1>
+    <ul class="list-group" style="margin-top: 2em; margin-bottom:2em">
+        {{#each puzzles}}
+        <li class="list-group-item">
+            <a href="/sudoku/{{id}}" class="btn" style="background-color: #09BC8A; color:white !important">Continue</a> <b>{{difficulty}}</b> game started on <b>{{createdAt}}</b>
+        </li>
+        {{/each}}
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</main>

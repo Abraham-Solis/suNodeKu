@@ -1,0 +1,99 @@
+<main class="min-vh-100">
+  {{!-- main banner with website name --}}
+  <div class="container">
+    <div class="row bg-light p-5 rounded-lg mb-3 mt-3" id="jumbo">
+      <h1 class="display-4 d-flex justify-content-center" id="mainname">SuNodeKu</h1>
+      <p class="lead d-flex justify-content-center">SuNodeKu is an interactive puzzle challenge create a profile then
+        choose a difficulty to get started!</p>
+      <hr class="my-4">
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <h3 style="color: #6FFFE9">Register New Account</h3>
+        <hr>
+        {{!-- form for registering user --}}
+        <form>
+          <div class="mb-3">
+            <label for="rUsername" class="form-label" style="color:#6FFFE9">Username</label>
+            <input type="text" class="form-control" id="rUsername">
+          </div>
+          <div class="mb-3">
+            <label for="rEmail" class="form-label" style="color:#6FFFE9">Email</label>
+            <input type="email" class="form-control" id="rEmail">
+          </div>
+          <div class="mb-3">
+            <label for="rPassword" class="form-label" style="color:#6FFFE9">Password</label>
+            <input type="password" class="form-control" id="rPassword">
+          </div>
+          <button id="register" type="submit" class="btn btn-success">Sign Up</button>
+        </form>
+      </div>
+      <div class="col-sm-6">
+        <h3 style="color:#6FFFE9">Login To Existing Account</h3>
+        <hr>
+        {{!-- form for logging into created accounts --}}
+        <form>
+          <div class="mb-3">
+            <label for="lUsername" class="form-label" style="color:#6FFFE9">Username</label>
+            <input type="text" class="form-control" id="lUsername">
+          </div>
+          <div class="mb-3">
+            <label for="lPassword" class="form-label" style="color:#6FFFE9">Password</label>
+            <input type="password" class="form-control" id="lPassword">
+          </div>
+          <button id="login" type="submit" class="btn btn-success">Login</button>
+        </form>
+      </div>
+    </div>
+
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+
+    function registerUser() {
+      let newUser = {
+        username: document.getElementById('rUsername').value,
+        email: document.getElementById('rEmail').value,
+        password: document.getElementById('rPassword').value
+      }
+      axios.post('/api/users/register', newUser)
+        .then(res => {
+          console.log("user created")
+          document.getElementById('rUsername').value = ''
+          document.getElementById('rEmail').value = ''
+          document.getElementById('rPassword').value = ''
+        }).catch(err => {
+      alert('Invalid Info Provided. Please Try Again.');
+    });
+        
+    }
+    document.getElementById('register').addEventListener('click', event => {
+      event.preventDefault()
+      registerUser()
+    })
+
+
+
+    function loginUser() {
+      let oldUser = {
+        username: document.getElementById('lUsername').value,
+        password: document.getElementById('lPassword').value
+      }
+      axios.post('/api/users/login', oldUser)
+        .then(res => {
+          console.log(res)
+          localStorage.setItem('token', res.data.token)
+          location = '/mainmenu'
+        }).catch(err => {
+      alert("Invalid Username or Password. Please Try Again.");
+    });
+    }
+    document.getElementById('login').addEventListener('click', event => {
+      event.preventDefault()
+      loginUser()
+    })
+
+
+  </script>
+</main>
