@@ -5,7 +5,7 @@ class Post extends Model { }
 Post.init({
   data: {
     type: DataTypes.BLOB,
-    allowNull: false
+    allowNull: true
   },
   title: {
     type: DataTypes.STRING,
