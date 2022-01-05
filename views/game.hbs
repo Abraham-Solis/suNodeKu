@@ -108,6 +108,10 @@
                     number: parseInt(event.target.innerHTML)
                 }).then(res => {
                     selected.innerHTML = event.target.innerHTML;
+                    if(res.data.continue == false) {
+                        alert("You won!");
+                        location = "/mainmenu";
+                    }
                 }).catch(err => {
                     alert("Invalid move.")
                 })
@@ -163,8 +167,10 @@
                     }
                     sudoku_grid.append(row);
                 }
+                console.log(currentPuzzle.solution)
+
             })
-        } else if(state == "load-game") {
+        } else if(state == "load-puzzle") {
             axios.get(`/api/sudoku/{{puzzleId}}`).then(res => {
                 currentPuzzle = res.data;
                 puzzleId = res.data.puzzleId;
@@ -197,8 +203,8 @@
                     }
                     sudoku_grid.append(row);
                 }
+                console.log(currentPuzzle.solution)
             })
-
 
         }
     }

@@ -5,7 +5,7 @@ class Puzzles extends Model { }
 
 Puzzles.init({
   data: {
-    type: DataTypes.STRING,
+    type: DataTypes.BLOB,
     allowNull: false
   },
   difficulty: {
