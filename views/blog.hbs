@@ -1,4 +1,48 @@
-<body>
+<style>
+    table.sudoku_grid {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    table.sudoku_grid tr,
+    table.sudoku_grid td {
+        border: 1px solid #000;
+        text-align: center;
+        font-size: 18pt;
+        font-weight: bold;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        table#sudoku_grid tr,
+        table#sudoku_grid td {
+            font-size: 12pt;
+        }
+    }
+
+    table.sudoku_grid td {
+        width: 11.1%;
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+        vertical-align: middle;
+    }
+
+    .selected {
+        background-color: #6FFFE9;
+    }
+
+    .wrong {
+        background-color: red;
+    }
+
+    .given {
+        background-color: lightgray;
+    }
+
+</style>
+
+
+<main class="container">
   <h1>Start Typing to begin a Post</h1>
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>
@@ -12,14 +56,7 @@
   <button class="btn btn-primary" id="submit" type="submit">Submit</button>
   <br>
 
-
-  <div id="title"></div>
-  <div id="body"></div>
-
-  <div id="myPost"></div>
-  <div id="comments"></div>
-
-  <div id="posts" class="row"></div>
+  <ul id="posts" class="list-group"></ul>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -37,6 +74,39 @@
         .then(res => {
           console.log(res)
         })
+    }
+
+
+    function createSudokuBoard(puzzle) {
+      console.log(puzzle)
+      let sudoku_grid = document.createElement('table');
+      sudoku_grid.className = "sudoku_grid"
+
+        for (let y = 0; y < 9; y++) {
+            let row = document.createElement('tr');
+
+            if (y == 2 || y == 5) {
+                row.style.borderBottom = "3px solid #000";
+            }
+
+            for (let x = 0; x < 9; x++) {
+                let column = document.createElement('td');
+                let index = x + (y * 9);
+                column.id = index;
+                column.className = "cell"
+                if (puzzle[index] < 255) {
+                    column.innerHTML = puzzle[index];
+                }
+
+                if (x == 2 || x == 5) {
+                    column.style.borderRight = "3px solid #000";
+                }
+                row.append(column);
+            }
+            sudoku_grid.append(row);
+        }
+
+      return sudoku_grid
     }
 
     document.getElementById("submit").addEventListener('click', event => {
@@ -57,7 +127,8 @@
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
-
+        }).then(res => {
+          location = "/blog"
         })
       }
     })
@@ -72,34 +143,51 @@
         console.log(res.data)
         let posts = res.data
         posts.forEach(posts => {
-          let postElem = document.createElement('div')
-          let commentElem = document.createElement('div')
+          let postElem = document.createElement('li')
+          postElem.className = "list-group-item"
+
+          let commentElem = document.createElement('ul')
+          commentElem.className = "list-group";
+
           posts.comments.forEach(comments => {
-            let commentDiv = document.createElement('div')
-            commentDiv.innerHTML = `
-            <p> ${comments.body} </p>
-            `
+            let commentDiv = document.createElement('li')
+            commentDiv.className = "list-group-item"
+            commentDiv.innerHTML = `<p> ${comments.body} </p><sub>Posted by User#${comments.uid}</sub>`
             commentElem.append(commentDiv)
-        
-
-
           })
-          postElem.innerHTML = `
-          <div class = contianer>
-            <div style = "text-align: center;">
-          <h3 class="goToPost" data-postid="${posts.id}"> ${posts.title} </h3>
-          <p>${posts.body}</p>
-            <h5> posted by <i>${posts.User.username}</i> </h5>
-           <p> ${posts.data.data.join(",")}  <p>
-             <label for="comment" class="form-label">Add a Comment</label>
+
+        let cardDiv = document.createElement("div")
+        cardDiv.className = "card mb-3"
+
+        let cardHeader = document.createElement("div")
+        cardHeader.className = "card-header"
+        cardHeader.innerHTML = `
+              <h3>${posts.title}</h3>
+              <sub>Posted  by <i>${posts.User.username}</i></sub>`
+        
+        cardDiv.append(cardHeader);
+
+        let cardBody = document.createElement("div")
+        cardBody.className = "card-body";
+        cardBody.innerHTML = `<p>${posts.body}</p><br />`
+
+        let puzzleTable = createSudokuBoard(posts.data.data);
+        cardBody.append(puzzleTable)
+
+
+        cardBody.append(commentElem);
+        let newCommentForm = document.createElement("div");
+        newCommentForm.innerHTML = `
+          <hr>
+          <label for="comment" class="form-label">Add a Comment</label>
           <textarea class="form-control" id="comment-${posts.id}" rows="3" placeholder="Additional Details..."></textarea>
           <button class="btn btn-primary submitComment" data-postid="${posts.id}" type="submit">Submit</button>
-            <hr>
-            </div>
-            </div>
-            `
-          postElem.append(commentElem)
-          document.getElementById('posts').prepend(postElem)
+        `
+        cardBody.append(newCommentForm)
+        cardDiv.append(cardBody);
+        
+         
+          document.getElementById('posts').prepend(cardDiv)
         })
 
       })
@@ -107,7 +195,5 @@
 
 
   </script>
-
-</body>
 
 </main>
