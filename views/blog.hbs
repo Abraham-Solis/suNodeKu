@@ -10,6 +10,7 @@
   </div>
 
   <button class="btn btn-primary" id="submit" type="submit">Submit</button>
+  <br>
 
 
   <div id="title"></div>
@@ -18,6 +19,7 @@
   <div id="myPost"></div>
   <div id="comments"></div>
 
+  <div id="posts" class="row"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -42,6 +44,24 @@
       createPost()
     })
 
+    document.addEventListener('click', event => {
+      event.preventDefault()
+      if (event.target.className.split(" ").includes("submitComment")) {
+        let postId = event.target.dataset.postid
+        let commentBody = document.getElementById(`comment-${postId}`).value
+        let newComment = {
+          body: commentBody,
+          pid: postId
+        }
+        axios.post('/api/comments', newComment, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+
+        })
+      }
+    })
+
     axios.get('/api/posts', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -51,54 +71,40 @@
 
         console.log(res.data)
         let posts = res.data
-        posts.forEach(post => {
+        posts.forEach(posts => {
           let postElem = document.createElement('div')
-          postElem.innerHTML = `
-            <h3 class="goToPost" data-postid="${post.id}"> ${post.title} </h3>
-            <h5> posted by ${post.User.username} </h5>
-            <p> ${post.body} </p>
+          let commentElem = document.createElement('div')
+          posts.comments.forEach(comments => {
+            let commentDiv = document.createElement('div')
+            commentDiv.innerHTML = `
+            <p> ${comments.body} </p>
             `
+            commentElem.append(commentDiv)
+        
+
+
+          })
+          postElem.innerHTML = `
+          <div class = contianer>
+            <div style = "text-align: center;">
+          <h3 class="goToPost" data-postid="${posts.id}"> ${posts.title} </h3>
+          <p>${posts.body}</p>
+            <h5> posted by <i>${posts.User.username}</i> </h5>
+           <p> ${posts.data.data.join(",")}  <p>
+             <label for="comment" class="form-label">Add a Comment</label>
+          <textarea class="form-control" id="comment-${posts.id}" rows="3" placeholder="Additional Details..."></textarea>
+          <button class="btn btn-primary submitComment" data-postid="${posts.id}" type="submit">Submit</button>
+            <hr>
+            </div>
+            </div>
+            `
+          postElem.append(commentElem)
           document.getElementById('posts').prepend(postElem)
         })
 
       })
 
-    document.addEventListener('click', event => {
-      if (event.target.classList.contains('goToPost')) {
-        console.log('ping')
-        localStorage.setItem('postId', event.target.dataset.postid)
-        location = '/blog.hbs'
-      }
-    })
 
-    let postId = localStorage.getItem('postId')
-    axios.get(`/api/posts/${postId}`, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-      .then(res => {
-        console.log(res)
-        let post = res.data
-        let postElem = document.createElement('div')
-        postElem.innerHTML = `
-        <h1> ${post.title} </h1>
-        <h3> ${post.body} <h3>
-        `
-        document.getElementById('myPost').append(postElem)
-
-        post.comments.forEach(comments => {
-          console.log(comments)
-
-          let commentsElem = document.createElement('div')
-          commentsElem.innerHTML = `
-          ${comments.body}
-          
-          `
-          document.getElementById('comments').append(commentsElem)
-        })
-
-      })
 
   </script>
 

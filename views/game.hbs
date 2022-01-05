@@ -52,8 +52,6 @@
     <h1 class="gameTitle">Good Luck!</h1>
 
     <div class="container" style="align-content: center;">
-        <button class="btn btn-secondary" style="width: 6em;">Post</button>
-        <button class="btn btn-secondary" style="width: 8em;">Save Game</button>
     </div>
 
     <br>
@@ -74,6 +72,16 @@
             <button id="check_answers">Check answers (CHEATER!)</button>
         </div>
     </div>
+
+<div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="email" class="form-control" id="title" placeholder="Descritption...">
+</div>
+<div class="mb-3">
+    <label for="body" class="form-label">Body</label>
+    <textarea class="form-control" id="body" rows="3" placeholder="Additional Details..."></textarea>
+</div>
+        <button class="btn btn-secondary" id="submit" style="width: 6em;">Post</button>
 
 
 
@@ -208,5 +216,28 @@
     }
 
     init();
+
+
+    function createPost() {
+        let newPost = {
+            title: document.getElementById('title').value,
+            body: document.getElementById('body').value,
+            puzzle: Object.values(currentPuzzle.board)
+        }
+        axios.post('/api/posts', newPost, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => {
+                console.log(res)
+            })
+    }
+
+    document.getElementById("submit").addEventListener('click', event => {
+        event.preventDefault()
+        createPost()
+    })
+
 
 </script>

@@ -8,11 +8,20 @@ router.get('/posts', passport.authenticate('jwt'), async function (req, res) {
   res.json(postData)
 })
 
+router.get('/posts/:id', passport.authenticate('jwt'), async function (req, res) {
+  const posts = await Post.findOne({ where: { id: req.params.id }, include: [User, Comments] })
+  res.json(posts)
+})
+
+
 // POST one post
 router.post('/posts', passport.authenticate('jwt'), async function ({ body, user }, res) {
+  console.log(body)
   const postData = await Post.create({
-    ...body,
-    uid: user.id
+    body: body.body,
+    title: body.title,
+    uid: user.id,
+    data: new Buffer.from(body.puzzle)
   })
   res.json(postData)
 })
