@@ -63,7 +63,10 @@
           document.getElementById('rUsername').value = ''
           document.getElementById('rEmail').value = ''
           document.getElementById('rPassword').value = ''
-        })
+        }).catch(err => {
+      alert('Invalid Info Provided. Please Try Again.');
+    });
+        
     }
     document.getElementById('register').addEventListener('click', event => {
       event.preventDefault()
@@ -82,9 +85,10 @@
           console.log(res)
           localStorage.setItem('token', res.data.token)
           location = '/mainmenu'
-        })
+        }).catch(err => {
+      alert("Invalid Username or Password. Please Try Again.");
+    });
     }
-
     document.getElementById('login').addEventListener('click', event => {
       event.preventDefault()
       loginUser()
