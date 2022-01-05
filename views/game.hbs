@@ -1,6 +1,7 @@
 <style>
     table#sudoku_grid {
         width: 100%;
+        background-color: white;
     }
 
     table#sudoku_grid tr,
@@ -58,8 +59,8 @@
     <div class="gameBoard">
         <div id="game" class="container gameBoard" style="text-align: center;">
             <table id="sudoku_grid"></table>
+            <br>
             <button class="num">&nbsp;</button>
-            <button class="num">0</button>
             <button class="num">1</button>
             <button class="num">2</button>
             <button class="num">3</button>
@@ -70,18 +71,23 @@
             <button class="num">8</button>
             <button class="num">9</button><br />
             <button id="check_answers">Check answers (CHEATER!)</button>
+
+            <hr>
+
+            <h1 style="color: #6FFFE9">Ask a question about this puzzle</h1>
+            <div class="mb-3">
+                <label for="title" class="form-label" style="color: #6FFFE9">Title</label>
+                <input type="email" class="form-control" id="title" placeholder="Descritption...">
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label" style="color: #6FFFE9">Body</label>
+                <textarea class="form-control" id="body" rows="3" placeholder="Additional Details..."></textarea>
+            </div>
+            <button class="btn btn-secondary" id="submit" style="width: 6em;">Post</button>
+
         </div>
     </div>
 
-<div class="mb-3">
-    <label for="title" class="form-label">Title</label>
-    <input type="email" class="form-control" id="title" placeholder="Descritption...">
-</div>
-<div class="mb-3">
-    <label for="body" class="form-label">Body</label>
-    <textarea class="form-control" id="body" rows="3" placeholder="Additional Details..."></textarea>
-</div>
-        <button class="btn btn-secondary" id="submit" style="width: 6em;">Post</button>
 
 
 

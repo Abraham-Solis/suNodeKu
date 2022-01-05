@@ -43,18 +43,18 @@
 
 
 <main class="container">
-  <h1>Start Typing to begin a Post</h1>
+  <h1 style="color: #6FFFE9">Post a question!</h1>
   <div class="mb-3">
-    <label for="title" class="form-label">Title</label>
+    <label for="title" class="form-label" style="color: #6FFFE9">Title</label>
     <input type="email" class="form-control" id="title" placeholder="Descritption...">
   </div>
   <div class="mb-3">
-    <label for="body" class="form-label">Body</label>
+    <label for="body" class="form-label" style="color: #6FFFE9">Body</label>
     <textarea class="form-control" id="body" rows="3" placeholder="Additional Details..."></textarea>
   </div>
 
   <button class="btn btn-primary" id="submit" type="submit">Submit</button>
-  <br>
+  <br><br />
 
   <ul id="posts" class="list-group"></ul>
 
@@ -152,6 +152,7 @@
           posts.comments.forEach(comments => {
             let commentDiv = document.createElement('li')
             commentDiv.className = "list-group-item"
+            commentDiv.style.backgroundColor = "#EEE"
             commentDiv.innerHTML = `<p> ${comments.body} </p><sub>Posted by User#${comments.uid}</sub>`
             commentElem.append(commentDiv)
           })

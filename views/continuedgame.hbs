@@ -47,10 +47,16 @@
     }
 </style>
 
-<main class="continuedGame">
+<main class="continuedGame container">
 
-
-
+    <h1 style="color: #6FFFE9">Continue a game</h1>
+    <ul class="list-group" style="margin-top: 2em; margin-bottom:2em">
+        {{#each puzzles}}
+        <li class="list-group-item">
+            <a href="/sudoku/{{id}}" class="btn" style="background-color: #09BC8A; color:white !important">Continue</a> <b>{{difficulty}}</b> game started on <b>{{createdAt}}</b>
+        </li>
+        {{/each}}
+    </ul>
 
 
 
