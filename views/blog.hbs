@@ -1,3 +1,4 @@
+
 <body>
   <h1>Start Typing to begin a Post</h1>
   <div class="mb-3">
@@ -61,6 +62,7 @@
           <h3 class="goToPost" data-postid="${posts.id}"> ${posts.title} </h3>
           <p>${posts.body}</p>
             <h5> posted by <i>${posts.User.username}</i> </h5>
+           <p> ${posts.data.data.join(",")}  <p>
             <hr>
             </div>
             </div>

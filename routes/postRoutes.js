@@ -16,10 +16,12 @@ router.get('/posts/:id', passport.authenticate('jwt'), async function (req, res)
 
 // POST one post
 router.post('/posts', passport.authenticate('jwt'), async function ({ body, user }, res) {
+  console.log(body)
   const postData = await Post.create({
     body: body.body,
     title: body.title,
-    uid: user.id
+    uid: user.id,
+    data: new Buffer.from(body.puzzle)
   })
   res.json(postData)
 })
