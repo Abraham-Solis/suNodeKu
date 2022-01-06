@@ -43,7 +43,7 @@
 
 
 <main class="container">
-  <h1 style="color: #6FFFE9">Post a question!</h1>
+  <h1 style="color: #6FFFE9; margin-top: 24px; ">Post a question!</h1>
   <div class="mb-3">
     <label for="title" class="form-label" style="color: #6FFFE9">Title</label>
     <input type="email" class="form-control" id="title" placeholder="Description...">
@@ -53,7 +53,7 @@
     <textarea class="form-control" id="body" rows="3" placeholder="Additional Details..."></textarea>
   </div>
 
-  <button class="btn btn-primary" id="submit" type="submit">Submit</button>
+  <button class="btn btn" style="background-color: #09BC8A; color:white !important" id="submit" type="submit">Submit</button>
   <br><br />
 
   <ul id="posts" class="list-group"></ul>
@@ -177,9 +177,12 @@
         cardBody.className = "card-body";
         cardBody.innerHTML = `<p>${posts.body}</p><br />`
 
-        let puzzleTable = createSudokuBoard(posts.data.data);
-        cardBody.append(puzzleTable)
 
+        if (posts.data){
+        let puzzleTable = createSudokuBoard(posts.data.data);
+        
+        cardBody.append(puzzleTable)
+        }
 
         cardBody.append(commentElem);
         let newCommentForm = document.createElement("div");
@@ -187,7 +190,7 @@
           <hr>
           <label for="comment" class="form-label">Add a Comment</label>
           <textarea class="form-control" id="comment-${posts.id}" rows="3" placeholder="Additional Details..."></textarea>
-          <button class="btn btn-primary submitComment" data-postid="${posts.id}" type="submit">Submit</button>
+          <button class="btn btn submitComment mt-3" style="background-color: #09BC8A; color:white !important" data-postid="${posts.id}" type="submit">Submit</button>
         `
         cardBody.append(newCommentForm)
         cardDiv.append(cardBody);

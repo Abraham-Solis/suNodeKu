@@ -165,7 +165,7 @@
     })
 
     document.getElementById('check_answers').addEventListener('click', event => {
-        for (let i = 0; i < 72; i++) {
+        for (let i = 0; i < 81; i++) {
             let cell = document.getElementById(i);
             if (cell.innerHTML !== '' && cell.innerHTML !== '&nbsp;') {
                 if (cell.innerHTML != currentPuzzle.solution[i]) {
