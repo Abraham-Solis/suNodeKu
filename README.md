@@ -11,7 +11,7 @@
   - [Questions](#questions)
 
   ## Description
-  SuNodeKu is an interactive puzzle challenge. Presented with a polished and responsive UI, SuNodeKu offers a competitive sudoku challenge to all who are willing to give it their best shot. SuNodeKu allows the user to select a difficulty level to generate a solvable sudoku grid in which  number of completed games, and total amount of games are recorded in your presonal profile and also on the overall server against other users.
+  SuNodeKu is an interactive puzzle challenge. Presented with a polished and responsive UI, SuNodeKu offers a competitive sudoku challenge to all who are willing to give it their best shot. There are multiple challenge levels starting from Easy and going up to Expert difficulty. The user is then able to select a difficulty level to generate a solvable sudoku grid in which  number of completed games, and total amount of games are recorded in your presonal profile and also on the overall server against other users.
 
   ## Installation
   *Steps required to install project and how to get the development environment running:*
