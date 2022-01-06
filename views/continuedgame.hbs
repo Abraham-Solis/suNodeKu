@@ -53,14 +53,21 @@
     <ul class="list-group" style="margin-top: 2em; margin-bottom:2em">
         {{#each puzzles}}
         <li class="list-group-item">
-            <a href="/sudoku/{{id}}" class="btn" style="background-color: #09BC8A; color:white !important">Continue</a> <b>{{difficulty}}</b> game started on <b>{{createdAt}}</b>
+            <a href="/sudoku/{{id}}" class="btn" style="background-color: #09BC8A; color:white !important">Continue</a> <b>{{difficulty}}</b> game started on <b class="dateTime">{{createdAt}}</b>
         </li>
         {{/each}}
     </ul>
 
 
 
-
+    <script>
+        document.addEventListener('DOMContentLoaded', event => {
+            let times = document.querySelectorAll('.dateTime');
+            times.forEach((val, key) => {
+                val.innerHTML = new Date(val.innerHTML).toLocaleString();
+            })
+        })
+    </script>
 
 
 
