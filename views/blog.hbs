@@ -150,7 +150,7 @@
           commentElem.className = "list-group";
 
           posts.comments.forEach(async comments => {
-            comments.user = await axios.get(`/api/users/${comments.uid}`, {
+            comments.user = await axios.get(`/api/users/get/${comments.uid}`, {
                     headers: {
                       'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
