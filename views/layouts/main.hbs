@@ -18,7 +18,7 @@
 
 
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     {{!-- nav bar with font awesome icons --}}
     <nav class="navbar-expand-lg shadow">
@@ -66,14 +66,19 @@
     {{!-- <br> --}}
     {{!-- attempt at sticky footer --}}
     <footer class="p-4 mt-auto">
-        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3" style="width:100%">
             <li class="nav-item"><a href="/" class="nav-link px-2">Login</a></li>
             <li class="nav-item"><a href="/mainmenu" class="nav-link px-2">Profile</a></li>
             <li class="nav-item"><a href="/leaderboard" class="nav-link px-2">Leaderboard</a></li>
-            <li class="nav-item"><a href="/blog" class="nav-link px-2">Blog</a></li>
+            <li class="nav-item"><a href="/blog" class="nav-link px-2">Forum</a></li>
             <li class="nav-item"><a href="/api/users/logout" id="logout" class="nav-link px-2">Logout</a></li>
         </ul>
-        <p class="text-center">© 2021 Company, Inc</p>
+        <div class="text-center" style="width:100%">
+            <a href="https://github.com/rytc">Ryan Capote</a> ●
+            <a href="https://github.com/Abraham-Solis">Abraham Solis</a>●
+            <a href="https://github.com/me0wmerz">Rachel Hoelscher</a>●
+            <a href="https://github.com/bradleyjosephh">Bradley Hankus</a>
+        </div>
     </footer>
 
 
