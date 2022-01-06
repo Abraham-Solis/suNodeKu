@@ -132,8 +132,12 @@
 
             }
         } else {
-            if (selected) selected.className = "cell";
-            selected = null;
+            if (selected) {
+                let classList = selected.className.split(' ')
+                classList.splice(classList.indexOf('selected'), 1)
+                selected.className = classList.join(' ')
+                selected = null;
+            }
 
         }
     })
@@ -169,7 +173,7 @@
             let cell = document.getElementById(i);
             if (cell.innerHTML !== '' && cell.innerHTML !== '&nbsp;') {
                 if (cell.innerHTML != currentPuzzle.solution[i]) {
-                    cell.className += ' wrong';
+                    cell.className = ' cell wrong';
                 }
             }
         }
