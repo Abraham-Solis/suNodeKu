@@ -205,7 +205,7 @@
                         }
                         if (!currentPuzzle.blank[index]) {
                             column.innerHTML = currentPuzzle.board[index];
-                        }
+                        } else { column.innerHTML = '&nbsp;' }
 
                         if (x == 2 || x == 5) {
                             column.style.borderRight = "3px solid #000";
@@ -241,7 +241,7 @@
                         }
                         if (!currentPuzzle.blank[index]) {
                             column.innerHTML = currentPuzzle.board[index];
-                        }
+                        } else { column.innerHTML = '&nbsp;'}
 
                         if (x == 2 || x == 5) {
                             column.style.borderRight = "3px solid #000";
