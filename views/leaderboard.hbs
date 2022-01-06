@@ -1,12 +1,12 @@
 <main class="leaderboard-background container" style="color:white; padding-bottom: 400px;">
   <div id="content">
 
-    <h1>Leaderboard</h1>
+    <h1 style="margin-top: 28px; color: #6FFFE9;">Leaderboard</h1>
     <ul class="list-group" style="margin-bottom: 2em;">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold" style="font-size: 2rem">{{leaderboard.mostGamesPlayed.username}}</div>
-          Most Games Played
+          Most Games Finished
         </div>
         <div class="badge bg-secondary rounded-pill" style="font-size:24pt">{{leaderboard.mostGamesPlayed.count}}</div>
       </li>
@@ -44,14 +44,14 @@
       </li>
     </ul>
     
-    <h1>User stats</h1>
+    <h1 style="color: #6FFFE9;">User stats</h1>
     {{#each eachUserStats}}
       <h3>{{username}}</h3>
 
       <ul class="list-group" style="margin-bottom: 2em; width:60%">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
-          Most Games Played
+          Total Games Finished
         </div>
         <div class="badge bg-secondary rounded-pill" style="font-size:16pt">{{totalCompletedPuzzles}}</div>
       </li>

@@ -4,7 +4,7 @@ const passport = require('passport')
 
 // GET all posts
 router.get('/posts', passport.authenticate('jwt'), async function (req, res) {
-  const postData = await Post.findAll({ include: [User,Comments] })
+  const postData = await Post.findAll({ include: [User, Comments] })
   res.json(postData)
 })
 
@@ -17,13 +17,23 @@ router.get('/posts/:id', passport.authenticate('jwt'), async function (req, res)
 // POST one post
 router.post('/posts', passport.authenticate('jwt'), async function ({ body, user }, res) {
   console.log(body)
-  const postData = await Post.create({
-    body: body.body,
-    title: body.title,
-    uid: user.id,
-    data: new Buffer.from(body.puzzle)
-  })
-  res.json(postData)
+  if (body.puzzle) {
+    const postData = await Post.create({
+      body: body.body,
+      title: body.title,
+      uid: user.id,
+      data: new Buffer.from(body.puzzle)
+    })
+    res.json(postData)
+  }
+  else {
+    const postData = await Post.create({
+      body: body.body,
+      title: body.title,
+      uid: user.id,
+    })
+    res.json(postData)
+  }
 })
 
 // DELETE one post
