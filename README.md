@@ -11,7 +11,11 @@
   - [Questions](#questions)
 
   ## Description
-  SuNodeKu is an interactive puzzle challenge. Presented with a polished and responsive UI, SuNodeKu offers a competitive sudoku challenge to all who are willing to give it their best shot. There are multiple challenge levels starting from Easy and going up to Expert difficulty. The user is then able to select a difficulty level to generate a solvable sudoku grid in which  number of completed games, and total amount of games are recorded in your personal profile and also on the overall server against other users. If users are stuck on an "impossible" puzzle, the user can access the forum via the game page to post their current game state to ask a question for other users to see. Users can post comments to help solve puzzles posted by other users.  
+  SuNodeKu is an interactive puzzle challenge. Presented with a polished and responsive UI, SuNodeKu offers a competitive sudoku challenge to all who are willing to give it their best shot. There are multiple challenge levels starting from Easy and going up to Expert difficulty. The user is then able to select a difficulty level to generate a solvable sudoku grid in which  number of completed games, and total amount of games are recorded in your personal profile and also on the overall server against other users. If users are stuck on an "impossible" puzzle, the user can access the forum via the game page to post their current game state to ask a question for other users to see. Users can post comments to help solve puzzles posted by other users. 
+
+  Live Link: https://sunodeku.herokuapp.com/ 
+
+  <img src="https://user-images.githubusercontent.com/92957388/148321258-a049bc95-4641-4479-9359-05a450fc1704.PNG" alt="SunodeKu">
 
   ## Installation
   *Steps required to install project and how to get the development environment running:*
@@ -37,7 +41,7 @@
 
   ## Questions
   For any questions, please contact me with the information below:
-  
+
   GitHub: https://github.com/Abraham-Solis
   Email: abe.solis2015@gmail.com
 
