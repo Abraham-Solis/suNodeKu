@@ -24,7 +24,7 @@ router.post('/users/login', (req, res) => {
   })
 })
 
-router.get('/users/:id', passport.authenticate('jwt'), (req, res) => {
+router.get('/users/get/:id', passport.authenticate('jwt'), (req, res) => {
   User.findOne({raw:true, where: {id: req.params.id}}).then(entry => {
     res.json(entry);
   })

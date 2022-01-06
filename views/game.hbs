@@ -131,6 +131,36 @@
                 })
 
             }
+        } else {
+            if (selected) selected.className = "cell";
+            selected = null;
+
+        }
+    })
+
+
+    document.addEventListener('keyup', event => {
+        if(selected) {
+            event.preventDefault();
+            if (!isGiven() && isFinite(event.key)) {
+
+                let num = parseInt(event.key);
+                if(num == 0 || num > 9) return;
+
+                axios.put(`/api/sudoku/${puzzleId}`, {
+                    cellIndex: selected.id,
+                    number: num
+                }).then(res => {
+                    selected.innerHTML = num;
+                    if(res.data.continue == false) {
+                        alert("You won!");
+                        location = "/mainmenu";
+                    }
+                }).catch(err => {
+                    alert("Invalid move.")
+                })
+
+            }
         }
     })
 
@@ -144,6 +174,8 @@
             }
         }
     })
+
+
 
 
     function init() {
