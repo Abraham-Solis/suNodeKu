@@ -151,6 +151,7 @@
         if(state === "new-puzzle") {
             axios.get(`/api/sudoku/new/{{difficulty}}`).then(res => {
                 currentPuzzle = res.data;
+                console.log(currentPuzzle)
                 puzzleId = res.data.puzzleId;
 
                 let sudoku_grid = document.getElementById('sudoku_grid');
@@ -186,6 +187,7 @@
         } else if(state == "load-puzzle") {
             axios.get(`/api/sudoku/{{puzzleId}}`).then(res => {
                 currentPuzzle = res.data;
+                console.log(currentPuzzle)
                 puzzleId = res.data.puzzleId;
 
                 let sudoku_grid = document.getElementById('sudoku_grid');
@@ -218,7 +220,7 @@
                 }
             })
 
-        } console.log(currentPuzzle)
+        } 
     }
 
     init();
