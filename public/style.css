@@ -1,5 +1,11 @@
 body {
     font-family: 'Coming Soon', cursive !important;
+    background-color: #3A506B !important;
+}
+
+main {
+    margin: 0px;
+    padding-bottom: 12px;
 }
 
 
@@ -30,11 +36,14 @@ html, body {
 #mainname {
     color: #6FFFE9;
 }
+main{
+    padding-bottom: 10px;
+}
 
 /* STYLING FOR MAIN MENU PAGE */
 .statsPadding {
     padding-top: 19px;
-    padding-bottom: 125px;
+    padding-bottom: 2em;
 }
 
 .statsBackground {
@@ -52,19 +61,20 @@ html, body {
 }
 
 .statsEasy {
-    background-color: #99d98c;
+    background-color: #99d98c !important;
 }
 
 .statsMedium {
-    background-color: #fcbf49;
+    background-color: #fcbf49 !important;
 }
 
 .statsHard {
-    background-color: #d62828;
+    background-color: #d62828 !important;
 }
 
 .statsExpert {
-    background-color: #800016;
+    background-color: #800016 !important;
+    color:#FFF !important;
 }
 
 .statsText {
@@ -145,3 +155,4 @@ html, body {
 .leaderboard-background {
     background-color: #3A506B;
 }
+

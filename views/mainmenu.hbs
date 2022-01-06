@@ -1,58 +1,40 @@
-<body class="statsBackground">
+<main class="statsBackground">
   <div class=" text-center ">
 
     <div class="card-body statsBackground">
       <h5 class="card-title statsHeading statsPadding statsWelcome">Welcome {{username}}! </h5>
-      <p class="card-text statsSubHeading">Check out your Stats, Records, and Start a New Game or continue your Previous
-        Game! </p>
+      <p class="card-text statsSubHeading">Check out your stats, start a new game or continue your previous game! </p>
       <br>
-      <a href="/difficulty" class="btn btn-success buttonPadding btn-lg buttonSpacer">New Game!</a>
-      <a href="#" class="btn btn-secondary btn-lg buttonSpacer">Resume Game!</a>
+      <a href="/difficulty" class="btn btn-success buttonPadding btn-lg buttonSpacer p-4 m-4" style="font-weight:bold; font-size: 24pt">New Game</a>
+      <a href="/continuedgame" class="btn btn-secondary btn-lg buttonSpacer p-4" style="font-weight:bold; font-size: 24pt">Resume Game</a>
 
     </div>
   </div>
 
-<br>
-<br>
-<br>
-<br>
-
-
-  <div class="div container">
-    <div class="div row">
-      <div class="div col-6">
-        <h1 style="text-align: center;">Your Recrded Stats Below</h1>
-      </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-8"><h1 style="color:#6FFFE9">Your Stats Below</h1></div>
+      <div class="col-4"><h1 style="color:#6FFFE9">Achievements</h1></div>
     </div>
-  </div>
-
-
-
-
-
-
-  <div class="row">
-    <div class="col-8 statsPaddingLeft">
-
-      <br>
+    <div class="row">
+      <div class="col-8 statsPaddingLeft">
       {{!-- Easy Mode Container --}}
 
       <div class="container statsPadding statsEasy">
         <div class="row align-items-center">
           <div class="row">
-            <h3 style="text-align: center;" class="statsHeading">Your Recorded "Easy" Diffuclty is Recorded Below</h3>
-            <br>
-            <br>
-            <div class="col-4">
-              <h2 class="statsText"> Average Time: {{averageTime}}</h2>
-              <h4> </h4>
+            <div class="col-12">
+              <h3 style="text-align: center;" class="statsHeading">Your "Easy" Difficulty Record</h3>
             </div>
-            <div class="col-4">
-              <h2 class="statsText"> Number of Games Played: {{totalGames}}</h2>
-
+          </div>
+          <div class="row">
+            <div class="col-6 text-center">
+              <h2 class="statsText"> Number of Games Completed:</h2>
+              <h1>{{easyGamesCompleted}}</h1>
             </div>
-            <div class="col-4">
-              <h2 class="statsText"> Previous Games: </h2>
+            <div class="col-6 text-center">
+              <h2 class="statsText"> Total Games:</h2>
+              <h1>{{totalEasyGames}}</h1>
             </div>
           </div>
         </div>
@@ -64,20 +46,18 @@
       <div class="container statsPadding statsMedium">
         <div class="row align-items-center">
           <div class="row">
-            <h3 style="text-align: center;" class="statsHeading">Your Recorded "Medium" Difficulty is Recorded Below</h3>
-            <br>
-            <br>
-            <div class="col-4">
-              <h2 class="statsText"> Average Time: {{averageTime}} </h2>
-
-              <h4> </h4>
+            <div class="col-12">
+              <h3 style="text-align: center;" class="statsHeading">Your "Medium" Diffuclty Record</h3>
             </div>
-            <div class="col-4">
-              <h2 class="statsText"> Number of Games Played: {{totalGames}} </h2>
-
+          </div>
+          <div class="row">
+            <div class="col-6 text-center">
+              <h2 class="statsText"> Number of Games Completed:</h2>
+              <h1>{{mediumGamesCompleted}}</h1>
             </div>
-            <div class="col-4">
-              <h2 class="statsText"> Previous Games: </h2>
+            <div class="col-6 text-center">
+              <h2 class="statsText"> Total Games: </h2>
+              <h1>{{totalMediumGames}}
             </div>
           </div>
         </div>
@@ -89,20 +69,18 @@
       <div class="container statsPadding statsHard ">
         <div class="row align-items-center">
           <div class="row">
-            <h3 style="text-align: center;" class="statsHeading">Your Recorded "Hard" Difficulty is Recorded Below</h3>
-            <br>
-            <br>
-            <div class="col-4">
-              <h2 class="statsText"> Average Time: </h2>
-
-              <h4> </h4>
+            <div class="col-12 text-center">
+              <h3 style="text-align: center;" class="statsHeading">Your "Hard" Diffuclty Record</h3>
             </div>
-            <div class="col-4">
-              <h2 class="statsText"> Number of Games Played: {{totalGames}} </h2>
-
+          </div>
+          <div class="row">
+            <div class="col-6 text-center">
+              <h2 class="statsText"> Number of Games Completed:</h2>
+              <h1>{{hardGamesCompleted}}</h1>
             </div>
-            <div class="col-4">
-              <h2 class="statsText"> Previous Games: </h2>
+            <div class="col-6 text-center">
+              <h2 class="statsText"> Total Games: </h2>
+              <h1>{{totalHardGames}}
             </div>
           </div>
         </div>
@@ -114,21 +92,18 @@
       <div class="container statsPadding statsExpert">
         <div class="row align-items-center">
           <div class="row">
-            <h3 style="text-align: center;" class="statsHeading"> Your Recorded "Expert" Diffuclty is Recorded Below
-            </h3>
-            <br>
-            <br>
-            <div class="col-4">
-              <h2 class="statsText"> Average Time: </h2>
-
-              <h4> </h4>
+            <div class="col-12">
+              <h3 style="text-align: center;" class="statsHeading"> Your "Expert" Diffuclty Record</h3>
             </div>
-            <div class="col-4">
-              <h2 class="statsText"> Number of Games Played:</h2>
-
+          </div>
+          <div class="row">
+            <div class="col-6 text-center">
+              <h2 class="statsText"> Number of Games Completed:</h2>
+              <h1>{{expertGamesCompleted}}</h1>
             </div>
-            <div class="col-4">
-              <h2 class="statsText"> Previous Games: </h2>
+            <div class="col-6 text-center">
+              <h2 class="statsText"> Total Games: </h2>
+              <h1>{{totalExpertGames}}</h1>
             </div>
           </div>
         </div>
@@ -139,19 +114,13 @@
     {{!-- Achievement Block --}}
 
     <div class="div col-4 achievementHeader">
-      <h1 class="achievementCenter achievementHeader">Your Achievements!</h1>
       <div class="card padding-left: 75px;" style="width: 18rem;">
-
-
         <div class="card-body">
-          <h5 class="card-title achievementHeader"><i class="fas fa-trophy"></i>Card title</h5>
+          <h5 class="card-title achievementHeader"><i class="fas fa-trophy"></i>&nbsp;Easy Peasy</h5>
 
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.
-          </p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-
+          <p class="card-text">You completed 10 easy puzzles!</p>
+          <a href="#" class="card-link">Share on Twitter!</a><br />
+          <a href="#" class="card-link">Share on Facebook!</a>
 
         </div>
       </div>
@@ -165,10 +134,9 @@
 
 
 
-
 </script>
 
 
 
 
-</body>
+</main>

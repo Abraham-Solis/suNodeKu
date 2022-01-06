@@ -1,6 +1,7 @@
 <style>
     table#sudoku_grid {
         width: 100%;
+        background-color: white;
     }
 
     table#sudoku_grid tr,
@@ -47,21 +48,19 @@
     }
 </style>
 
-<body class="gameBackground">
+<main class="gameBackground">
 
     <h1 class="gameTitle">Good Luck!</h1>
 
     <div class="container" style="align-content: center;">
-        <button class="btn btn-secondary" style="width: 6em;">Post</button>
-        <button class="btn btn-secondary" style="width: 8em;">Save Game</button>
     </div>
 
     <br>
     <div class="gameBoard">
         <div id="game" class="container gameBoard" style="text-align: center;">
             <table id="sudoku_grid"></table>
+            <br>
             <button class="num">&nbsp;</button>
-            <button class="num">0</button>
             <button class="num">1</button>
             <button class="num">2</button>
             <button class="num">3</button>
@@ -72,16 +71,35 @@
             <button class="num">8</button>
             <button class="num">9</button><br />
             <button id="check_answers">Check answers (CHEATER!)</button>
+
+            <hr>
+
+            <h1 style="color: #6FFFE9">Ask a question about this puzzle</h1>
+            <div class="mb-3">
+                <label for="title" class="form-label" style="color: #6FFFE9">Title</label>
+                <input type="email" class="form-control" id="title" placeholder="Descritption...">
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label" style="color: #6FFFE9">Body</label>
+                <textarea class="form-control" id="body" rows="3" placeholder="Additional Details..."></textarea>
+            </div>
+            <button class="btn btn-secondary" id="submit" style="width: 6em;">Post</button>
+
         </div>
     </div>
 
-</body>
+
+
+
+</main>
+
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     let selected = null;
     let currentPuzzle = null;
-
+    let puzzleId = null;
+    
     let isGiven = () => {
         if (selected) {
             return selected.className.split(' ').includes('given')
@@ -98,7 +116,20 @@
             selected = event.target;
         } else if (event.target.className === "num" && selected) {
             if (!isGiven()) {
-                selected.innerHTML = event.target.innerHTML;
+                
+                axios.put(`/api/sudoku/${puzzleId}`, {
+                    cellIndex: selected.id,
+                    number: parseInt(event.target.innerHTML)
+                }).then(res => {
+                    selected.innerHTML = event.target.innerHTML;
+                    if(res.data.continue == false) {
+                        alert("You won!");
+                        location = "/mainmenu";
+                    }
+                }).catch(err => {
+                    alert("Invalid move.")
+                })
+
             }
         }
     })
@@ -114,136 +145,108 @@
         }
     })
 
-    axios.get("/api/sudoku/new/easy").then(res => {
-        currentPuzzle = res.data;
 
-        let sudoku_grid = document.getElementById('sudoku_grid');
+    function init() {
+        let state = "{{state}}"
+        if(state === "new-puzzle") {
+            axios.get(`/api/sudoku/new/{{difficulty}}`).then(res => {
+                currentPuzzle = res.data;
+                console.log(currentPuzzle)
+                puzzleId = res.data.puzzleId;
 
-        for (let y = 0; y < 9; y++) {
-            let row = document.createElement('tr');
+                let sudoku_grid = document.getElementById('sudoku_grid');
 
-            if (y == 2 || y == 5) {
-                row.style.borderBottom = "3px solid #000";
-            }
+                for (let y = 0; y < 9; y++) {
+                    let row = document.createElement('tr');
 
-            for (let x = 0; x < 9; x++) {
-                let column = document.createElement('td');
-                let index = x + (y * 9);
-                column.id = index;
-                column.className = "cell"
-                if (currentPuzzle.given[index]) {
-                    column.className = " given";
+                    if (y == 2 || y == 5) {
+                        row.style.borderBottom = "3px solid #000";
+                    }
+
+                    for (let x = 0; x < 9; x++) {
+                        let column = document.createElement('td');
+                        let index = x + (y * 9);
+                        column.id = index;
+                        column.className = "cell"
+                        if (currentPuzzle.given[index]) {
+                            column.className = " given";
+                        }
+                        if (!currentPuzzle.blank[index]) {
+                            column.innerHTML = currentPuzzle.board[index];
+                        }
+
+                        if (x == 2 || x == 5) {
+                            column.style.borderRight = "3px solid #000";
+                        }
+                        row.append(column);
+                    }
+                    sudoku_grid.append(row);
                 }
-                if (!currentPuzzle.blank[index]) {
-                    column.innerHTML = currentPuzzle.board[index];
-                }
 
-                if (x == 2 || x == 5) {
-                    column.style.borderRight = "3px solid #000";
+            })
+        } else if(state == "load-puzzle") {
+            axios.get(`/api/sudoku/{{puzzleId}}`).then(res => {
+                currentPuzzle = res.data;
+                console.log(currentPuzzle)
+                puzzleId = res.data.puzzleId;
+
+                let sudoku_grid = document.getElementById('sudoku_grid');
+
+                for (let y = 0; y < 9; y++) {
+                    let row = document.createElement('tr');
+
+                    if (y == 2 || y == 5) {
+                        row.style.borderBottom = "3px solid #000";
+                    }
+
+                    for (let x = 0; x < 9; x++) {
+                        let column = document.createElement('td');
+                        let index = x + (y * 9);
+                        column.id = index;
+                        column.className = "cell"
+                        if (currentPuzzle.given[index]) {
+                            column.className = " given";
+                        }
+                        if (!currentPuzzle.blank[index]) {
+                            column.innerHTML = currentPuzzle.board[index];
+                        }
+
+                        if (x == 2 || x == 5) {
+                            column.style.borderRight = "3px solid #000";
+                        }
+                        row.append(column);
+                    }
+                    sudoku_grid.append(row);
                 }
-                row.append(column);
-            }
-            sudoku_grid.append(row);
+            })
+
+        } 
+    }
+
+    init();
+
+
+    function createPost() {
+        let newPost = {
+            title: document.getElementById('title').value,
+            body: document.getElementById('body').value,
+            puzzle: Object.values(currentPuzzle.board)
         }
-    })
-
-    axios.get("/api/sudoku/new/medium").then(res => {
-            currentPuzzle = res.data;
-
-            let sudoku_grid = document.getElementById('sudoku_grid');
-
-            for (let y = 0; y < 9; y++) {
-                let row = document.createElement('tr');
-
-                if (y == 2 || y == 5) {
-                    row.style.borderBottom = "3px solid #000";
-                }
-
-                for (let x = 0; x < 9; x++) {
-                    let column = document.createElement('td');
-                    let index = x + (y * 9);
-                    column.id = index;
-                    column.className = "cell"
-                    if (currentPuzzle.given[index]) {
-                        column.className = " given";
-                    }
-                    if (!currentPuzzle.blank[index]) {
-                        column.innerHTML = currentPuzzle.board[index];
-                    }
-
-                    if (x == 2 || x == 5) {
-                        column.style.borderRight = "3px solid #000";
-                    }
-                    row.append(column);
-                }
-                sudoku_grid.append(row);
+        axios.post('/api/posts', newPost, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
+            .then(res => {
+                console.log(res)
+                location = "/blog"
+            })
+    }
 
-    axios.get("/api/sudoku/new/hard").then(res => {
-        currentPuzzle = res.data;
-
-        let sudoku_grid = document.getElementById('sudoku_grid');
-
-        for (let y = 0; y < 9; y++) {
-            let row = document.createElement('tr');
-
-            if (y == 2 || y == 5) {
-                row.style.borderBottom = "3px solid #000";
-            }
-
-            for (let x = 0; x < 9; x++) {
-                let column = document.createElement('td');
-                let index = x + (y * 9);
-                column.id = index;
-                column.className = "cell"
-                if (currentPuzzle.given[index]) {
-                    column.className = " given";
-                }
-                if (!currentPuzzle.blank[index]) {
-                    column.innerHTML = currentPuzzle.board[index];
-                }
-
-                if (x == 2 || x == 5) {
-                    column.style.borderRight = "3px solid #000";
-                }
-                row.append(column);
-            }
-            sudoku_grid.append(row);
-        }
+    document.getElementById("submit").addEventListener('click', event => {
+        event.preventDefault()
+        createPost()
     })
 
-    axios.get("/api/sudoku/new/expert").then(res => {
-            currentPuzzle = res.data;
-
-            let sudoku_grid = document.getElementById('sudoku_grid');
-
-            for (let y = 0; y < 9; y++) {
-                let row = document.createElement('tr');
-
-                if (y == 2 || y == 5) {
-                    row.style.borderBottom = "3px solid #000";
-                }
-
-                for (let x = 0; x < 9; x++) {
-                    let column = document.createElement('td');
-                    let index = x + (y * 9);
-                    column.id = index;
-                    column.className = "cell"
-                    if (currentPuzzle.given[index]) {
-                        column.className = " given";
-                    }
-                    if (!currentPuzzle.blank[index]) {
-                        column.innerHTML = currentPuzzle.board[index];
-                    }
-
-                    if (x == 2 || x == 5) {
-                        column.style.borderRight = "3px solid #000";
-                    }
-                    row.append(column);
-                }
-                sudoku_grid.append(row);
-            }
-        })
 
 </script>

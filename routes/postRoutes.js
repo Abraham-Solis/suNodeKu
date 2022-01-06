@@ -4,22 +4,31 @@ const passport = require('passport')
 
 // GET all posts
 router.get('/posts', passport.authenticate('jwt'), async function (req, res) {
-  const postData = await Post.findAll({ include: [User] })
+  const postData = await Post.findAll({ include: [User,Comments] })
   res.json(postData)
 })
 
+router.get('/posts/:id', passport.authenticate('jwt'), async function (req, res) {
+  const posts = await Post.findOne({ where: { id: req.params.id }, include: [User, Comments] })
+  res.json(posts)
+})
+
+
 // POST one post
 router.post('/posts', passport.authenticate('jwt'), async function ({ body, user }, res) {
+  console.log(body)
   const postData = await Post.create({
-    ...body,
-    uid: user.id
+    body: body.body,
+    title: body.title,
+    uid: user.id,
+    data: new Buffer.from(body.puzzle)
   })
   res.json(postData)
 })
 
 // DELETE one post
-router.delete('/posts/:id', passport.authenticate('jwt'), async function ({ params: { id } }, res) {
-  await Post.destroy({ where: { id } })
+router.delete('/posts/:id', passport.authenticate('jwt'), async function (req, res) {
+  await Post.destroy({ where: { id: req.params.id } })
   res.sendStatus(200)
 })
 
