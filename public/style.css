@@ -60,6 +60,20 @@ main{
     color: #5BC0BE;
 }
 
+@media only screen and (max-width: 600px) {
+    .statsWelcome {
+        font-size:45px;
+    }
+
+    .statsSubHeading {
+        font-size:23px;
+    }
+
+    .statsText {
+        font-size:15px;
+    }
+}
+
 .statsEasy {
     background-color: #99d98c !important;
 }
